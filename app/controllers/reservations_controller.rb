@@ -31,13 +31,11 @@ class ReservationsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
       if @reservation.update(reservation_params)
         redirect_to user_path(@user.id)
       else
         render :edit
       end
-    end
   end
 
   def destroy
