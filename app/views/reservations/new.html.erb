@@ -1,2 +1,9 @@
-<h1>Reservations#new</h1>
-<p>Find me in app/views/reservations/new.html.erb</p>
+ <h1>Add reservation</h1>
+
+<%= simple_form_for [@user, @reservation] do |f| %>
+  <%= f.input :starts_at %>
+  <%= f.input :ends_at %>
+  <%= f.input :content %>
+  <%= f.input :adress %>
+  <%= f.submit class: "btn btn-danger" %>
+<% end %>
