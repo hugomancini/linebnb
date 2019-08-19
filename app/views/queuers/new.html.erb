@@ -1,0 +1,8 @@
+<h1>New queuer:</h1>
+<%= simple_form_for([@user, @queuer]) do |f| %>
+  <%= f.input :address %>
+  <%= f.input :description %>
+  <%= f.input :radius %>
+  <%= f.integer :price_per_hour %>
+  <%= f.submit "Create Queuer", class: "btn btn-primary" %>
+<% end %>
