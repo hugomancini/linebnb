@@ -1,7 +1,5 @@
 <h1>All reviews bound to a given reservation</h1>
 <% @reviews.each do |review| %>
-  <% if review.user_id != @reservation.user.id %>
-    <%= review.content %>
-  <% end %>
+  <p><%= review.content %></p>
 <% end %>
 

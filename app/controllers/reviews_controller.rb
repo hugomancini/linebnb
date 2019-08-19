@@ -1,9 +1,10 @@
 class ReviewsController < ApplicationController
 
   before_action :set_reservation
+  before_action :set_queuer, only: [:index, :create]
 
   def index
-    @reviews = @reservation.reviews
+    @reviews = @queuer.reviews
   end
 
   def new
@@ -16,7 +17,7 @@ class ReviewsController < ApplicationController
     @review.reservation = @reservation
     @review.user = @user
     if @review.save
-      redirect_ to user_path(@user)
+      redirect_ to queuer_path(@queuer)
     else
       render :new
     end
@@ -30,6 +31,10 @@ class ReviewsController < ApplicationController
 
   def set_reservation
     @reservation = Reservation.find(params[:reservation_id])
+  end
+
+  def set_queuer
+    @queuer = @reservation.queuer
   end
 
 end
