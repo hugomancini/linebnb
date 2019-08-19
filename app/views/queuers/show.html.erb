@@ -1,0 +1,6 @@
+<h1>This particular Queuer:</h1>
+<h3><%= @queuer.user.name %></h3>
+<p><%= @queuer.address %> for a perimeter of <%= @queuer.radius %>km.</p>
+<%= link_to "Back", queuers_path %>
+<%= link_to "Edit", edit_queuer_path(@queuer) %>
+<%= link_to "Delete", queuer_path(@queuer), method: :delete %>
