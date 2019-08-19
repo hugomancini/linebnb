@@ -16,7 +16,6 @@ class QueuersController < ApplicationController
     @user.is_q = true
     @queuer = Queuer.new(queuer_params)
     @queuer.user = @user
-    @queuer.rating = @user.rating
     @queuer.save
     redirect_to queuer_path(@queuer)
   end
