@@ -5,6 +5,7 @@
 @import "home";
 @import "footer";
 @import "navbar";
+@import "profil";
 
 h3 {
   font-size: 21px;
@@ -16,6 +17,13 @@ h3 {
 
 .container {
   width: 65%;
+  margin: 0 auto;
+}
+
+.container-profil {
+  width: 100%;
+  display:flex;
+  justify-content: center;
   margin: 0 auto;
 }
 
