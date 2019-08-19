@@ -10,7 +10,7 @@ class ReservationsController < ApplicationController
 
   def new
     @queuer = Queuer.find(params[:queuer_id])
-    @user = User.find(params[:user_id])
+    @user = current_user
     @reservation = Reservation.new
   end
 
@@ -19,12 +19,12 @@ class ReservationsController < ApplicationController
 
   def create
     @queuer = Queuer.find(params[:queuer_id])
-    @user = User.find(params[:user_id])
+    @user = current_user
     @reservation = Reservation.new(reservation_params)
     @reservation.user = @user
     @reservation.queuer = @queuer
     if @reservation.save
-      redirect_to user_path(@user.id)
+      redirect_to user_path(current_user)
     else
       render :new
     end
@@ -32,7 +32,7 @@ class ReservationsController < ApplicationController
 
   def update
       if @reservation.update(reservation_params)
-        redirect_to user_path(@user.id)
+        redirect_to user_path(current_user)
       else
         render :edit
       end
@@ -40,9 +40,9 @@ class ReservationsController < ApplicationController
 
   def destroy
     @queuer = Queuer.find(params[:queuer_id])
-    @user = User.find(params[:user_id])
+    @user = current_user
     @reservation.destroy
-    redirect_to user_path(@user.id)
+    redirect_to user_path(current_user)
   end
 
   private

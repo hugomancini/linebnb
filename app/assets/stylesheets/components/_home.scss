@@ -1,0 +1,153 @@
+.banner {
+  position: relative;
+}
+
+.banner::before {
+  background-image : url(https://besthqwallpapers.com/Uploads/7-5-2018/51388/hourglass-4k-time-concept-close-up-clock.jpg);
+  background-size: cover;
+  filter: brightness(50%);
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.banner-image {
+  position: relative;
+  box-shadow: 0 0 30px rgba(0,0,0,0.7);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .text-banner {
+    color: white;
+    text-align: justify;
+    width: 60%;
+    align-self:center;
+  }
+}
+
+.banner-form {
+  padding-top: 80px;
+  input {
+    width: 350px;
+    padding: 10px 20px;
+  }
+  .btn {
+    height: 100%;
+    margin-bottom: 1px;
+    text-align: center;
+    margin-left: 35px;
+    padding: 10px 20px;
+  }
+}
+
+.card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+  width: 30%;
+  img {
+    object-fit: cover;
+    padding-top: 25px;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  p {
+    text-align: justify;
+    padding: 20px;
+  }
+}
+
+.title-banner {
+  text-align:left;
+}
+
+.middle {
+  position:relative;
+  transform: center center;
+}
+
+.middle::before {
+  background-image: url(https://cdn.dribbble.com/users/992274/screenshots/6349746/bags_kit8-net.png);
+  background-position: center;
+  background-size:cover;
+  filter: brightness(50%);
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.middle-info-container {
+  position: relative;
+  margin-top: 50px;
+  height: 200px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  padding-top: 6%;
+  div {
+    filter: opacity(150%);
+  }
+  input {
+    height: 38px;
+  }
+  h2 {
+    font-weight: bolder;
+    color: white;
+  }
+}
+
+@media (max-width: 1360px) {
+  /* For a screen < 960px, this CSS will be read */
+  .card {
+    width: 32%;
+  }
+}
+
+@media (max-width: 1060px) {
+  /* For a screen < 960px, this CSS will be read */
+  .hidden {
+    display: none;
+  }
+  .card {
+    width: 45%;
+  }
+  .title-banner {
+    text-align: center;
+  }
+  .toop {
+    padding-top: 35px;
+  }
+}
+@media (max-width: 780px) {
+  /* For a screen < 720px, this CSS will be read */
+  .middle-text {
+    text-align: center;
+    font-size: 25px;
+  }
+  .middle {
+    height: 130px;
+  }
+  .card {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 540px) {
+  /* For a screen < 540px, this CSS will be read */
+  .middle {
+    height: 145px;
+  }
+}
