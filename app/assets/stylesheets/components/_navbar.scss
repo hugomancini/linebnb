@@ -1,12 +1,114 @@
 .navbar-lewagon {
+  display:flex;
   justify-content: space-between;
-  background: white;
+  background: black;
+  opacity: 0.7;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  color: white;
+  width: 100%;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  li {
+    padding: 15px 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  li:hover {
+    background-color: #2F4F4F;
+    transition-duration: 1s;
+  }
+}
+
+.navbar-nav {
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  li {
+    color: white;
+  }
 }
 
 .navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
 }
 
 .navbar-lewagon .navbar-brand img {
   width: 40px;
+}
+
+.navbar-collapse {
+  flex-grow:0;
+  justify-content: flex-end;
+  width: 400px;
+}
+.nav-item:hover {
+  opacity: 1;
+}
+
+@media (max-width: 1660px) {
+  /* For a screen < 960px, this CSS will be read */
+  .container, .banner-content-container {
+    width: 75%
+  }
+}
+
+@media (max-width: 1360px) {
+  /* For a screen < 960px, this CSS will be read */
+  .container, .banner-content-container {
+    width: 90%
+  }
+}
+
+@media (max-width: 1060px) {
+  /* For a screen < 960px, this CSS will be read */
+  .hidden {
+    display: none;
+  }
+  .container, .banner-content-container {
+    width: 95%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 760px) {
+  /* For a screen < 720px, this CSS will be read */
+  .container-card {
+    display: grid;
+    flex-wrap : wrap;
+  }
+  .container, .banner-content-container {
+    width: 100%;
+  }
+}
+@media (max-width: 580px) {
+  /* For a screen < 540px, this CSS will be read */
+  .navbar-lewagon li {
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .navbar-brand {
+    display: none;
+  }
+  .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0px;
+    width: 100%;
+  }
+  .navbar-collapse {
+    width: 100%;
+  }
 }

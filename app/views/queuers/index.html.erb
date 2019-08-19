@@ -1,4 +1,4 @@
 <h1>All Queuers:</h1>
 <% @queuers.each do |queuer| %>
-<%= link_to queuer.user.name, queuer_path(queuer) %>
+<h2><%= link_to queuer.user.name, queuer_path(queuer) %></h2>
 <% end %>
