@@ -1,8 +1,5 @@
 class ReviewsController < ApplicationController
 
-  def index
-  end
-
   def show
     @user = User.find(params[:id])
     if @user.is_q?
