@@ -1,6 +1,6 @@
  <h1>Add reservation</h1>
 
-<%= simple_form_for [@user, @reservation] do |f| %>
+<%= simple_form_for [@queuer, @reservation] do |f| %>
   <%= f.input :starts_at %>
   <%= f.input :ends_at %>
   <%= f.input :content %>

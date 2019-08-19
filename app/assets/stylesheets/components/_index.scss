@@ -2,3 +2,93 @@
 @import "alert";
 @import "avatar";
 @import "navbar";
+@import "home";
+@import "footer";
+@import "navbar";
+
+h3 {
+  font-size: 21px;
+}
+
+[data-aos^=fade][data-aos^=fade] {
+  transition-property : all;
+}
+
+.container {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.banner-content-container {
+  width: 65%;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-card {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+@media (max-width: 1660px) {
+  /* For a screen < 960px, this CSS will be read */
+  .container, .banner-content-container {
+    width: 75%
+  }
+}
+
+@media (max-width: 1360px) {
+  /* For a screen < 960px, this CSS will be read */
+  .container, .banner-content-container {
+    width: 90%
+  }
+}
+
+@media (max-width: 1060px) {
+  /* For a screen < 960px, this CSS will be read */
+  .hidden {
+    display: none;
+  }
+  .banner-content-container {
+    width: 95%;
+  }
+  .container-big-card {
+    height: 500px;
+  }
+}
+@media (max-width: 780px) {
+  /* For a screen < 720px, this CSS will be read */
+  .container-card {
+    display: grid;
+    flex-wrap : wrap;
+  }
+  .container {
+    width: 95%;
+  }
+  .banner-content-container {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+  h2 {
+    font-size: 21px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 15px;
+  }
+  p {
+    font-size: 13px;
+  }
+}
+@media (max-width: 540px) {
+  /* For a screen < 540px, this CSS will be read */
+
+}
