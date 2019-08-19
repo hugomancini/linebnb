@@ -5,5 +5,5 @@ class Reservation < ApplicationRecord
   validates :starts_at, presence: true
   validates :ends_at, presence: true
   validates :content, presence: true
-  validates :adress, presence: true
+  validates :address, presence: true
 end
