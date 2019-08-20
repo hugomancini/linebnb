@@ -68,6 +68,12 @@
   }
 }
 
+.card-profil-bottom {
+  display: flex;
+  flex-direction:row;
+  justify-content:space-between;
+}
+
 .container-card-dashboard {
   display: flex;
   flex-direction: column;
@@ -136,7 +142,7 @@
   border-bottom: 1px solid #c4cdcf;
   margin: 0 auto;
   margin-bottom: 40px;
-  width: 80%;
+  width: 90%;
 }
 
 .pad-top {

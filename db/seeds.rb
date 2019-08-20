@@ -57,10 +57,20 @@ end
     body << Faker::Lorem.sentence
   end
 
-  resa = Reservation.new(starts_at: DateTime.new(2019, 8, 19, 18, 00, 0), ends_at: DateTime.new(2019, 8, 19, 20, 00, 0), content: body, address: Faker::Address.full_address)
+  resa = Reservation.new(starts_at: DateTime.new(2019, 8, 19, 18, 00, 0), ends_at: DateTime.new(2019, 8, 19, 20, 00, 0), content: body, address: Faker::Address.full_address, statut: "waiting")
   resa.user = client
   resa.queuer = queuer
   resa.save
+
+  resi = Reservation.new(starts_at: DateTime.new(2019, 8, 19, 18, 00, 0), ends_at: DateTime.new(2019, 8, 19, 20, 00, 0), content: body, address: Faker::Address.full_address, statut: "process")
+  resi.user = client
+  resi.queuer = queuer
+  resi.save
+
+  reso = Reservation.new(starts_at: DateTime.new(2019, 8, 19, 18, 00, 0), ends_at: DateTime.new(2019, 8, 19, 20, 00, 0), content: body, address: Faker::Address.full_address, statut: "finished")
+  reso.user = client
+  reso.queuer = queuer
+  reso.save
 
   comment = ""
   rand(2..7).times do
@@ -68,7 +78,7 @@ end
   end
 
   review = Review.new(content: comment, rating: rand(1..5))
-  review.reservation = resa
+  review.reservation = resi
   review.user = client
   review.save
 end
