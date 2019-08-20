@@ -20,27 +20,47 @@
     </div>
 
     <% i = 0 %>
-    <% @reviews.each do |review| %>
-    <% if review.user != current_user %>
-    <% i += 1 %>
-    <div class="comment-container <% if i > 2 %> hide-comment <% end %>">
-      <div class="comment-card">
-        <div class="comment-top">
-          <div class="user-comment">
-            <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
-            <div><%= review.user.name %></p></div>
+    <% if current_user.is_q %>
+      <% @reviews_as_queuer.each do |review| %>
+      <% if review.user != current_user %>
+      <% i += 1 %>
+      <div class="comment-container <% if i > 2 %> hide-comment <% end %>">
+        <div class="comment-card">
+          <div class="comment-top">
+            <div class="user-comment">
+              <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
+              <div><%= review.user.name %></p></div>
+            </div>
+            <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
           </div>
-          <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
-        </div>
-        <div class="comment-content">
-          <p><%= review.content %></p>
+          <div class="comment-content">
+            <p><%= review.content %></p>
+          </div>
         </div>
       </div>
-    </div>
+      <% end %>
     <% end %>
+      <% @reviews_as_user.each do |review| %>
+      <% if review.user != current_user %>
+      <% i += 1 %>
+      <div class="comment-container <% if i > 2 %> hide-comment <% end %>">
+        <div class="comment-card">
+          <div class="comment-top">
+            <div class="user-comment">
+              <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
+              <div><%= review.user.name %></p></div>
+            </div>
+            <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
+          </div>
+          <div class="comment-content">
+            <p><%= review.content %></p>
+          </div>
+        </div>
+      </div>
+      <% end %>
     <% end %>
 
-    <% if @reviews.length != 0 && i > 2 %>
+    <% if @reviews_as_user.length != 0 || @reviews_as_queuer.length != 0 && i > 2 %>
       <div class="arrow">
         <h2><i class="fas fa-2x fa-sort-down"></i></h2>
       </div>
@@ -51,28 +71,50 @@
     <h2>Dashboard</h2>
     <div class="container-card-dashboard">
       <% if @user.is_q %>
-      <% @queuer.reservations.each do |reservation| %>
-      <div class="card-dashboard">
+      <% @reservations_as_queuer.each do |reservation| %>
+      <div class="card-dashboard queuer">
         <div><%= image_tag reservation.user.picture.url %></div>
         <div class="text-dashboard col-sm-9">
           <div class="top-card-dashboard">
             <div class="name"><h3><%= reservation.user.name %></h3></div>
-            <div class="date"><p>From <%= reservation.starts_at %> to reservation.ends_at 8pm</p></div>
+            <div class="date"><p>From <%= reservation.starts_at %> to <%= reservation.ends_at %></p></div>
           </div>
           <div class="description-dash"><p><%= reservation.content %></p></div>
         </div>
         <div class="button">
-          <% if @user.is_q == true && reservation.statut == "waiting" %>
-            <div><p class="btn btn-primary">Accept</p></div>
-            <div><p class="btn btn-warning">Decline</p></div>
-          <% elsif @user.is_q == false && reservation.statut == "waiting" %>
-            <div><p class="btn btn-primary">Cancel the reservation</p></div>
+          <% if reservation.statut == "waiting" %>
+            <div><%= link_to "Accept", statut_path(reservation), class: "btn btn-sucess" %></div>
+            <div><%= link_to "Decline", decline_path(reservation), class: "btn btn-warning" %></div>
           <% elsif @user.is_q == true && reservation.statut == "process" %>
-            <div><p class="btn btn-primary">Confirm</p></div>
-          <% elsif @user.is_q == false && reservation.statut == "process" %>
-            <div><p class="btn btn-warning">In process</p></div>
+            <div><%= link_to "Confirm", statut_path(reservation), class: "btn btn-primary" %></div>
+          <% elsif reservation.statut == "aborted" || reservation.statut == "declined" %>
+            <div><a href="#" class="btn btn-danger">Aborted</a></div>
           <% else %>
-          <div><p class="btn btn-warning">Finished</p></div>
+          <div><%= link_to "Comment", new_reservation_review_path(reservation), class: "btn btn-warning" %></div>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+      <% @reservations_as_user.each do |reservation| %>
+      <div class="card-dashboard user">
+        <div><%= image_tag reservation.queuer.user.picture.url %></div>
+        <div class="text-dashboard col-sm-9">
+          <div class="top-card-dashboard">
+            <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
+            <div class="date"><p>From <%= reservation.starts_at %> to <%= reservation.ends_at %></p></div>
+          </div>
+          <div class="description-dash"><p><%= reservation.content %></p></div>
+        </div>
+        <div class="button">
+          <% if reservation.statut == "waiting" %>
+            <div><%= link_to "Cancel", decline_path(reservation), class: "btn btn-warning" %></div>
+          <% elsif reservation.statut == "process" %>
+            <div><a href="#" class="btn btn-primary">In Process</a></div>
+          <% elsif reservation.statut == "aborted" %>
+            <div><p class="btn btn-danger">Aborted</p></div>
+          <% else %>
+          <div><%= link_to "Comment", new_reservation_review_path(reservation), class: "btn btn-warning" %></div>
           <% end %>
         </div>
       </div>

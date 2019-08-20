@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   resources :reservations, except: [:new, :create] do
     resources :reviews, only: [:index, :new, :create]
   end
+
+  get '/statut/:id', to: "reservations#statut", as: :statut
+  get '/decline/:id', to: "reservations#declined", as: :decline
 end

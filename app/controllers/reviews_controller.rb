@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-
   before_action :set_reservation
   before_action :set_queuer, only: [:index, :create]
 
