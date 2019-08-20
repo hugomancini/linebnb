@@ -10,7 +10,13 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <%= yield %>
+    <div>
+      <%= render "header" unless params[:controller] == "devise/registrations" %>
+      <div class="stick-footer">
+        <%= yield %>
+      </div>
+      <%= render "footer" unless params[:controller] == "devise/registrations" %>
+    </div>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </body>

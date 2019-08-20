@@ -36,7 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :picture
       t.integer :rating
-      t.boolean :is_q
+      t.boolean :is_q, default: false
 
       t.timestamps null: false
     end

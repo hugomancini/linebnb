@@ -1,5 +1,3 @@
-<%= render "header" %>
-
 <div class="banner-profil">
   <% if @user.picture.url != nil %><%= image_tag @user.picture.url %><% else %><img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt=""> <% end %>
 </div>
@@ -14,7 +12,7 @@
       </div>
       <div class="description"><p><%= current_user.description %></p></div>
       <div class="card-profil-bottom">
-        <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", user_queuers_path(@user), class: "btn btn-warning" %></div> <% end %>
+        <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", user_queuers_path(@user), class: "btn btn-primary" %></div> <% else %> <div><%= link_to "Stop your Queuer-Job", { controller: 'queuers', action: 'destroy' }, class: "btn btn-warning" %></div><% end %>
         <div class="edit-part"><h4><%= link_to edit_user_path do %><i class="fas fa-user-edit"></i><% end %></h4></div>
       </div>
     </div>
@@ -124,4 +122,3 @@
   </div>
 </div>
 
-<%= render "footer" %>

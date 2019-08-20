@@ -135,6 +135,10 @@
   }
 }
 
+.stick-footer {
+  min-height: calc(100vh - 100px);
+}
+
 @media (max-width: 1360px) {
   /* For a screen < 960px, this CSS will be read */
   .card {
