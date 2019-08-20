@@ -1,0 +1,71 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 16px;
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.card-queuer {
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.card-queuer-picture-container {
+  height: 200px;
+  width: 100%;
+  padding: 20px 0px;
+  position: relative;
+}
+
+.card-queuer-picture-container > img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+
+
+.first-icon {
+  position: absolute;
+  bottom: 85px;
+  left: 40%;
+  font-size: 30px;
+}
+
+.second-icon {
+  position: absolute;
+  bottom: 85px;
+  left: 60%;
+  font-size: 30px;
+}
+
+.card-queuer h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-queuer p {
+  font-size: 12px;
+  opacity: .7;
+  margin: 0;
+}
+
+.card-queuer .card-queuer-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  border-top: solid 1px rgb(220, 220, 220);
+}
+
+.card-queuer-infos .card-queuer-user {
+  position: absolute;
+  right: 16px;
+  top: -20px;
+  width: 40px;
+}
