@@ -30,7 +30,7 @@
               <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
               <div><%= review.user.name %></p></div>
             </div>
-            <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
+            <div><p><% review.user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((review.user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
           </div>
           <div class="comment-content">
             <p><%= review.content %></p>
