@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 offset-4" style="margin-top:200px">
+  <%= simple_form_for [@user] do |f| %>
+    <%= f.input :name, label: 'Fullname', :input_html => { :value => current_user.name } %>
+    <%= f.input :picture, label: 'Profile picture' %>
+    <%= f.input :picture_cache, as: :hidden %>
+    <%= f.submit "validate", class: "btn btn-primary" %>
+  <% end %>
+    </div>
+  </div>
+</div>
