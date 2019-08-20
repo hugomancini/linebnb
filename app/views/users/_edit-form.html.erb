@@ -1,0 +1,10 @@
+<div class="container">
+<p>Edit your profile info below :<p>
+  <%= simple_form_for [@user] do |f| %>
+    <%= f.input :name, label: 'Fullname', :input_html => { :value => current_user.name } %>
+    <%= f.input :picture, label: 'Profile picture' %>
+    <%= f.input :picture_cache, as: :hidden %>
+    <%= f.input :description, label: 'Description' %>
+    <%= f.submit "validate", class: "btn btn-primary" %>
+  <% end %>
+</div>
