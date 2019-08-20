@@ -3,9 +3,7 @@
 <div class="banner-profil">
   <% if @user.picture.url != nil %><%= image_tag @user.picture.url %><% else %><img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt=""> <% end %>
 </div>
-<div class="container-edit">
-    <%= render "edit-form" %>
-  </div>
+
 <div class="container-profil">
   <div class="col-sm-3 margintop">
     <div class="container-card-profil">
