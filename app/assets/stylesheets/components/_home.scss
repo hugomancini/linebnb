@@ -28,6 +28,17 @@
   z-index:100;
 }
 
+.modal-signin {
+  display: none;
+  background-color: white;
+  padding: 30px;
+  width: 40%;
+  left: 30%;
+  top: 18%;
+  position: absolute;
+  z-index:100;
+}
+
 .banner-image {
   position: relative;
   box-shadow: 0 0 30px rgba(0,0,0,0.7);

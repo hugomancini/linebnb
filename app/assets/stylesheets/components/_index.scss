@@ -12,6 +12,10 @@ h3 {
   font-size: 21px;
 }
 
+body {
+  height: 100vh;
+}
+
 [data-aos^=fade][data-aos^=fade] {
   transition-property : all;
 }

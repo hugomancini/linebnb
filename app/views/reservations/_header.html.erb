@@ -19,10 +19,14 @@
         </div>
       <% else %>
         <div>
-          <li class="nav-item active signin">Sign in</li>
+          <%= link_to new_user_registration_path do %>
+          <li class="nav-item active">Sign in</li>
+          <% end %>
         </div>
         <div>
-          <li class="nav-item active login">Login</li>
+          <%= link_to new_user_session_path do %>
+          <li class="nav-item active">Login</li>
+          <% end %>
         </div>
       <% end %>
     </ul>
