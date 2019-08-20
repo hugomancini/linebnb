@@ -37,13 +37,9 @@
       </div>
       <div class="description"><p><%= current_user.description %></p></div>
       <div class="card-profil-bottom">
-<<<<<<< HEAD
         <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", new_user_queuer_path(@user), class: "btn btn-primary" %></div> <% else %> <div><%= link_to "Stop your Queuer-Job", { controller: 'queuers', action: 'destroy' }, class: "btn btn-warning" %></div><% end %>
         <div class="edit-part"><h4><%= link_to edit_user_path do %><i class="fas fa-user-edit"></i><% end %></h4></div>
-=======
-        <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", user_queuers_path(@user), class: "btn btn-warning" %></div> <% end %>
-        <div class="edit-part"><h4><i id="edit-icon" class="fas fa-user-edit" data-toggle="modal" data-target="#editModal"></i></h4></div>
->>>>>>> c7ef7bb2a1b8b2e47de111d7068858cdb8627bdf
+
       </div>
     </div>
 
