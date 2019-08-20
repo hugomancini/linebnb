@@ -8,6 +8,24 @@ class ReservationsController < ApplicationController
   def show
   end
 
+  def statut
+    @reservation = Reservation.find(params[:id])
+    if @reservation.statut == "process"
+      @reservation.statut = "finished"
+    else
+      @reservation.statut = "process"
+    end
+    @reservation.save
+    redirect_to user_path(current_user)
+  end
+
+  def declined
+    @reservation = Reservation.find(params[:id])
+    @reservation.statut = "aborted"
+    @reservation.save
+    redirect_to user_path(current_user)
+  end
+
   def new
     @queuer = Queuer.find(params[:queuer_id])
     @user = current_user
