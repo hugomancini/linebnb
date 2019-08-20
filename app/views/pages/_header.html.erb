@@ -13,7 +13,7 @@
           <% end %>
         </div>
         <div>
-          <%= link_to destroy_user_session_path do %>
+          <%= link_to destroy_user_session_path, method: :delete do %>
           <li class="nav-item active">Logout</li>
           <% end %>
         </div>
@@ -24,7 +24,7 @@
           <% end %>
         </div>
         <div>
-          <%= link_to user_registration_path do %>
+          <%= link_to new_user_session_path do %>
           <li class="nav-item active">Login</li>
           <% end %>
         </div>
