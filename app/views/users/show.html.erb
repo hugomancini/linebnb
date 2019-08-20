@@ -1,146 +1,147 @@
 <%= render "header" %>
-
-  <div class="banner-profil">
-    <%= image_tag @user.picture.url %>
-  </div>
-
-  <div class="container-edit">
-    <%= render "edit-form" %>
-  </div>
-  <div class="container-profil">
-    <div class="col-sm-3 margintop">
-      <div class="container-card-profil">
-        <div><img src="<%= current_user.picture %>" alt="profile picture"></div>
-        <div class="info-profil">
-          <div class="name"><h2><%= current_user.name %></h2></div>
-          <div class="stars"><h3> <% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></h3></div>
-        </div>
-        <div class="description">
-        <% if current_user.description == nil || current_user.description == ""  %>
-          <p>Edit your profile to add description</p>
-          <% else %>
-          <p><%= current_user.description %></p><% end %>
-        </div>
-        <div class="card-profil-bottom">
-          <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", user_queuers_path(@user), class: "btn btn-warning" %></div> <% end %>
-          <div class="edit-part"><h4><%= link_to edit_user_path do %><i class="fas fa-user-edit"></i><% end %></h4></div>
-        </div>
-      </div>
-
-      <% i = 0 %>
-      <% if current_user.is_q %>
-        <% @reviews_as_queuer.each do |review| %>
-        <% if review.user != current_user %>
-        <% i += 1 %>
-        <div class="comment-container <% if i > 2 %> hide-comment <% end %>">
-          <div class="comment-card">
-            <div class="comment-top">
-              <div class="user-comment">
-                <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
-                <div><%= review.user.name %></p></div>
-              </div>
-              <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
-            </div>
-            <div class="comment-content">
-              <p><%= review.content %></p>
-            </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 55c73722f47c2cb20fd1f98a8f698e92a174a407
-            <div><p><% review.user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((review.user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
-          </div>
-          <div class="comment-content">
-            <p><%= review.content %></p>
-<<<<<<< HEAD
->>>>>>> 78765b1ab02ae6310903bd6e1b3827ca3cec2eb8
-=======
->>>>>>> 55c73722f47c2cb20fd1f98a8f698e92a174a407
-          </div>
-        </div>
-        <% end %>
-      <% end %>
-        <% @reviews_as_user.each do |review| %>
-        <% if review.user != current_user %>
-        <% i += 1 %>
-        <div class="comment-container <% if i > 2 %> hide-comment <% end %>">
-          <div class="comment-card">
-            <div class="comment-top">
-              <div class="user-comment">
-                <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
-                <div><%= review.user.name %></p></div>
-              </div>
-              <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% (5 - (current_user.rating.round)).times do %> <i class="far fa-star"></i> <% end %></p></div>
-            </div>
-            <div class="comment-content">
-              <p><%= review.content %></p>
-            </div>
-          </div>
-        </div>
-        <% end %>
-      <% end %>
-
-      <% if @reviews_as_user.length != 0 || @reviews_as_queuer.length != 0 && i > 2 %>
-        <div class="arrow">
-          <h2><i class="fas fa-2x fa-sort-down"></i></h2>
-        </div>
-      <% end %>
+    <div class="banner-profil">
+      <%= image_tag @user.picture.url %>
     </div>
 
-    <div class="col-sm-6 margintopmega big-dash-container">
-      <h2>Dashboard</h2>
-      <div class="container-card-dashboard">
-        <% if @user.is_q %>
-        <% @reservations_as_queuer.each do |reservation| %>
-        <div class="card-dashboard queuer">
-          <div><%= image_tag reservation.user.picture.url %></div>
-          <div class="text-dashboard col-sm-9">
-            <div class="top-card-dashboard">
-              <div class="name"><h3><%= reservation.user.name %></h3></div>
-              <div class="date"><p>From <%= reservation.starts_at %> to <%= reservation.ends_at %></p></div>
-            </div>
-            <div class="description-dash"><p><%= reservation.content %></p></div>
+  <div class="mybody">
+    <div class="modal-edit">
+      <%= render "edit-form" %>
+    </div>
+    <div class="container-profil">
+      <div class="col-sm-3 margintop">
+        <div class="container-card-profil">
+          <div><img src="<%= current_user.picture %>" alt="profile picture"></div>
+          <div class="info-profil">
+            <div class="name"><h2><%= current_user.name %></h2></div>
+            <div class="stars"><h3> <% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></h3></div>
           </div>
-          <div class="button">
-            <% if reservation.statut == "waiting" %>
-              <div><%= link_to "Accept", statut_path(reservation), class: "btn btn-sucess" %></div>
-              <div><%= link_to "Decline", decline_path(reservation), class: "btn btn-warning" %></div>
-            <% elsif @user.is_q == true && reservation.statut == "process" %>
-              <div><%= link_to "Confirm", statut_path(reservation), class: "btn btn-primary" %></div>
-            <% elsif reservation.statut == "aborted" || reservation.statut == "declined" %>
-              <div><a href="#" class="btn btn-danger">Aborted</a></div>
+          <div class="description">
+          <% if current_user.description == nil || current_user.description == ""  %>
+            <p>Edit your profile to add description</p>
             <% else %>
-            <div><%= link_to "Comment", new_reservation_review_path(reservation), class: "btn btn-warning" %></div>
-            <% end %>
+            <p><%= current_user.description %></p><% end %>
+          </div>
+          <div class="card-profil-bottom">
+            <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", user_queuers_path(@user), class: "btn btn-warning" %></div> <% end %>
+            <div class="edit-part"><h4><i id="edit-icon" class="fas fa-user-edit"></i></h4></div>
           </div>
         </div>
-        <% end %>
-        <% end %>
-        <% @reservations_as_user.each do |reservation| %>
-        <div class="card-dashboard user">
-          <div><%= image_tag reservation.queuer.user.picture.url %></div>
-          <div class="text-dashboard col-sm-9">
-            <div class="top-card-dashboard">
-              <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
-              <div class="date"><p>From <%= reservation.starts_at %> to <%= reservation.ends_at %></p></div>
+
+        <% i = 0 %>
+        <% if current_user.is_q %>
+          <% @reviews_as_queuer.each do |review| %>
+          <% if review.user != current_user %>
+          <% i += 1 %>
+          <div class="comment-container <% if i > 2 %> hide-comment <% end %>">
+            <div class="comment-card">
+              <div class="comment-top">
+                <div class="user-comment">
+                  <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
+                  <div><%= review.user.name %></p></div>
+                </div>
+                <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
+              </div>
+              <div class="comment-content">
+                <p><%= review.content %></p>
+              </div>
+  <<<<<<< HEAD
+  <<<<<<< HEAD
+  =======
+  =======
+  >>>>>>> 55c73722f47c2cb20fd1f98a8f698e92a174a407
+              <div><p><% review.user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((review.user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
             </div>
-            <div class="description-dash"><p><%= reservation.content %></p></div>
+            <div class="comment-content">
+              <p><%= review.content %></p>
+  <<<<<<< HEAD
+  >>>>>>> 78765b1ab02ae6310903bd6e1b3827ca3cec2eb8
+  =======
+  >>>>>>> 55c73722f47c2cb20fd1f98a8f698e92a174a407
+            </div>
           </div>
-          <div class="button">
-            <% if reservation.statut == "waiting" %>
-              <div><%= link_to "Cancel", decline_path(reservation), class: "btn btn-warning" %></div>
-            <% elsif reservation.statut == "process" %>
-              <div><a href="#" class="btn btn-primary">In Process</a></div>
-            <% elsif reservation.statut == "aborted" %>
-              <div><p class="btn btn-danger">Aborted</p></div>
-            <% else %>
-            <div><%= link_to "Comment", new_reservation_review_path(reservation), class: "btn btn-warning" %></div>
-            <% end %>
+          <% end %>
+        <% end %>
+          <% @reviews_as_user.each do |review| %>
+          <% if review.user != current_user %>
+          <% i += 1 %>
+          <div class="comment-container <% if i > 2 %> hide-comment <% end %>">
+            <div class="comment-card">
+              <div class="comment-top">
+                <div class="user-comment">
+                  <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
+                  <div><%= review.user.name %></p></div>
+                </div>
+                <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% (5 - (current_user.rating.round)).times do %> <i class="far fa-star"></i> <% end %></p></div>
+              </div>
+              <div class="comment-content">
+                <p><%= review.content %></p>
+              </div>
+            </div>
           </div>
+          <% end %>
+        <% end %>
+
+        <% if @reviews_as_user.length != 0 || @reviews_as_queuer.length != 0 && i > 2 %>
+          <div class="arrow">
+            <h2><i class="fas fa-2x fa-sort-down"></i></h2>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-sm-6 margintopmega big-dash-container">
+        <h2>Dashboard</h2>
+        <div class="container-card-dashboard">
+          <% if @user.is_q %>
+          <% @reservations_as_queuer.each do |reservation| %>
+          <div class="card-dashboard queuer">
+            <div><%= image_tag reservation.user.picture.url %></div>
+            <div class="text-dashboard col-sm-9">
+              <div class="top-card-dashboard">
+                <div class="name"><h3><%= reservation.user.name %></h3></div>
+                <div class="date"><p>From <%= reservation.starts_at %> to <%= reservation.ends_at %></p></div>
+              </div>
+              <div class="description-dash"><p><%= reservation.content %></p></div>
+            </div>
+            <div class="button">
+              <% if reservation.statut == "waiting" %>
+                <div><%= link_to "Accept", statut_path(reservation), class: "btn btn-sucess" %></div>
+                <div><%= link_to "Decline", decline_path(reservation), class: "btn btn-warning" %></div>
+              <% elsif @user.is_q == true && reservation.statut == "process" %>
+                <div><%= link_to "Confirm", statut_path(reservation), class: "btn btn-primary" %></div>
+              <% elsif reservation.statut == "aborted" || reservation.statut == "declined" %>
+                <div><a href="#" class="btn btn-danger">Aborted</a></div>
+              <% else %>
+              <div><%= link_to "Comment", new_reservation_review_path(reservation), class: "btn btn-warning" %></div>
+              <% end %>
+            </div>
+          </div>
+          <% end %>
+          <% end %>
+          <% @reservations_as_user.each do |reservation| %>
+          <div class="card-dashboard user">
+            <div><%= image_tag reservation.queuer.user.picture.url %></div>
+            <div class="text-dashboard col-sm-9">
+              <div class="top-card-dashboard">
+                <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
+                <div class="date"><p>From <%= reservation.starts_at %> to <%= reservation.ends_at %></p></div>
+              </div>
+              <div class="description-dash"><p><%= reservation.content %></p></div>
+            </div>
+            <div class="button">
+              <% if reservation.statut == "waiting" %>
+                <div><%= link_to "Cancel", decline_path(reservation), class: "btn btn-warning" %></div>
+              <% elsif reservation.statut == "process" %>
+                <div><a href="#" class="btn btn-primary">In Process</a></div>
+              <% elsif reservation.statut == "aborted" %>
+                <div><p class="btn btn-danger">Aborted</p></div>
+              <% else %>
+              <div><%= link_to "Comment", new_reservation_review_path(reservation), class: "btn btn-warning" %></div>
+              <% end %>
+            </div>
+          </div>
+          <% end %>
+          <% end %>
         </div>
-        <% end %>
-        <% end %>
       </div>
     </div>
   </div>

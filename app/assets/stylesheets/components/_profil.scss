@@ -225,8 +225,8 @@
   }
 }
 
-.container-edit {
-  display: block;
+.modal-edit {
+  display: none;
   position: absolute;
   width: 40%;
   background-color: white;
@@ -238,5 +238,9 @@
   margin-top: 10%;
 }
 
+.dark {
+  filter: brightness(30%);
+  background-color: gray;
+}
 
 

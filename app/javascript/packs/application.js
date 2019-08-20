@@ -1,3 +1,5 @@
 import "bootstrap";
-import { modalLogin } from "./modal";
+import { modalLogin, modalEdit } from "./modal";
+// import { modalEdit } from "./modal";
 modalLogin() ;
+modalEdit() ;
