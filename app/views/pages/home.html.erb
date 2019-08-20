@@ -1,6 +1,11 @@
 <%= render "header" %>
 
-<div class="banner">
+<div class="modal-login">
+  <%=  render "devise/sessions/newsession" %>
+</div>
+
+<div class="mybody">
+  <div class="banner">
   <div class="banner-image">
     <div class="banner-content-container">
       <div class="text-banner">
@@ -58,6 +63,7 @@
         <div><p>Ipsam vero urbem Byzantiorum fuisse refertissimam atque ornatissimam signis quis ignorat? Quae illi, exhausti sumptibus bellisque maximis, cum omnis Mithridaticos impetus totumque Pontum armatum affervescentem in Asiam atque erumpentem, ore repulsum et cervicibus interclusum.</p></div>
       </div>
   </div>
+</div>
 </div>
 
 <%=  render "footer" %>
