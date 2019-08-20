@@ -21,6 +21,7 @@ class ReservationsController < ApplicationController
     @queuer = Queuer.find(params[:queuer_id])
     @user = current_user
     @reservation = Reservation.new(reservation_params)
+    @reservation.statut = "waiting"
     @reservation.user = @user
     @reservation.queuer = @queuer
     if @reservation.save
