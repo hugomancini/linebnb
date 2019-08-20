@@ -6,6 +6,7 @@
 @import "footer";
 @import "navbar";
 @import "profil";
+@import "queuers";
 
 h3 {
   font-size: 21px;
@@ -18,6 +19,7 @@ h3 {
 .container {
   width: 65%;
   margin: 0 auto;
+  position:relative;
 }
 
 .container-profil {
