@@ -11,9 +11,21 @@
 @import "cardsami";
 @import "buttons";
 
-h3 {
-  font-size: 21px;
-}
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 25px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 15px;
+  }
+  p {
+    font-size: 13px;
+  }
 
 body {
   height: 100vh;
@@ -87,22 +99,6 @@ body {
   }
   .banner-content-container {
     width: 100%;
-  }
-
-  h1 {
-    font-size: 25px;
-  }
-  h2 {
-    font-size: 21px;
-  }
-  h3 {
-    font-size: 18px;
-  }
-  h4 {
-    font-size: 15px;
-  }
-  p {
-    font-size: 13px;
   }
 }
 @media (max-width: 540px) {
