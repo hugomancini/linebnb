@@ -6,7 +6,7 @@
 <div class="container-profil">
   <div class="col-sm-3 margintop">
     <div class="container-card-profil">
-      <div><img src="https://www.emavie.com/wp-content/uploads/2016/03/devenir-graphiste-8.jpg" alt=""></div>
+      <div><img src="<%= current_user.picture %>" alt=""></div>
       <div class="info-profil">
         <div class="name"><h2><%= current_user.name %></h2></div>
         <div class="stars"><h3><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></h3></div>
@@ -14,7 +14,7 @@
       <div class="description"><p><%= current_user.description %></p></div>
       <div class="card-profil-bottom">
         <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", user_queuers_path(@user), class: "btn btn-warning" %></div> <% end %>
-        <div class="edit-part"><h4><i class="fas fa-user-edit"></i></h4></div>
+        <div class="edit-part"><h4><%= link_to edit_user_path do %><i class="fas fa-user-edit"></i><% end %></h4></div>
       </div>
     </div>
 
