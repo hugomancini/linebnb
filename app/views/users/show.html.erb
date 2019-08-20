@@ -1,7 +1,135 @@
-<h1>Welcome to your profile <%= @user.name %> !</h1>
+<%= render "header" %>
 
-<br>
-<br>
-<% if @user.is_q == false %>
-<p>Become user !</p>
-<% end %>
+<div class="banner-profil">
+  <img src="https://www.emavie.com/wp-content/uploads/2016/03/devenir-graphiste-8.jpg" alt="">
+</div>
+
+<div class="container-profil">
+  <div class="col-sm-3 margintop">
+    <div class="container-card-profil">
+      <div><img src="https://www.emavie.com/wp-content/uploads/2016/03/devenir-graphiste-8.jpg" alt=""></div>
+      <div class="info-profil">
+        <div class="name"><h2>Jane Doe</h2></div>
+        <div class="stars"><h2><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></h2></div>
+      </div>
+      <div class="description"><p>Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem, sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant, quae Isauriae scopulis sunt controversa.</p></div>
+      <div class="edit-part"><h4><i class="fas fa-user-edit"></i></h4></div>
+      <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", user_queuers_path(@user), class: "btn btn-warning" %></div> <% end %>
+    </div>
+
+    <div class="comment-container">
+      <div class="comment-card">
+        <div class="comment-top">
+          <div class="user-comment">
+            <div><img src="http://www.centredecrisebsl.qc.ca/wp-content/uploads/2016/10/page-3.jpg" alt="" class="avatar"></div>
+            <div><p>Emilie P.</p></div>
+          </div>
+          <div><p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></i><i class="far fa-star"></i><i class="far fa-star"></i></p></div>
+        </div>
+        <div class="comment-content">
+          <p>Suis laribus in stipe tamquam noxii in timebatur quoque converso cruentam puniti victitabant claudebantur quoque.</p>
+        </div>
+      </div>
+    </div>
+    <div class="comment-container">
+      <div class="comment-card">
+        <div class="comment-top">
+          <div class="user-comment">
+            <div><img src="http://www.centredecrisebsl.qc.ca/wp-content/uploads/2016/10/page-3.jpg" alt="" class="avatar"></div>
+            <div><p>Emilie P.</p></div>
+          </div>
+          <div><p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></i><i class="far fa-star"></i><i class="far fa-star"></i></p></div>
+        </div>
+        <div class="comment-content">
+          <p>Suis laribus in stipe tamquam noxii in timebatur quoque converso cruentam puniti victitabant claudebantur quoque.</p>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">
+      <h2><i class="fas fa-2x fa-sort-down"></i></h2>
+    </div>
+  </div>
+
+  <div class="col-sm-6 margintopmega big-dash-container">
+    <h2>Dashboard</h2>
+    <div class="container-card-dashboard">
+      <div class="card-dashboard">
+        <div><img src="https://statics.lesinrocks.com/content/thumbs/uploads/2018/06/width-1125-height-612/edouard-louis-c-arnaud-delrue.jpg" alt=""></div>
+        <div class="text-dashboard col-sm-9">
+          <div class="top-card-dashboard">
+            <div class="name"><h3>Jim la Malice</h3></div>
+            <div class="date"><p>From 20/08/2019 at 5pm to 20/08/2019 at 8pm</p></div>
+          </div>
+          <div class="description-dash"><p>Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem, sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant, quae Isauriae scopulis sunt controversa.</p></div>
+        </div>
+        <div class="button">
+          <% if @user.is_q == false %>
+          <div><p class="btn btn-primary">Cancel the reservation</p></div>
+          <% else %>
+          <div><p class="btn btn-primary">Accept</p></div>
+          <div><p class="btn btn-warning">Decline</p></div>
+          <% end %>
+        </div>
+      </div>
+      <div class="ligne"></div>
+      <div class="card-dashboard">
+        <div><img src="https://statics.lesinrocks.com/content/thumbs/uploads/2018/06/width-1125-height-612/edouard-louis-c-arnaud-delrue.jpg" alt=""></div>
+        <div class="text-dashboard col-sm-9">
+          <div class="top-card-dashboard">
+            <div class="name"><h3>Jim la Malice</h3></div>
+            <div class="date"><p>From 20/08/2019 at 5pm to 20/08/2019 at 8pm</p></div>
+          </div>
+          <div class="description-dash"><p>Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem, sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant, quae Isauriae scopulis sunt controversa.</p></div>
+        </div>
+        <div class="button">
+          <% if @user.is_q == false %>
+          <div><p class="btn btn-primary">Cancel the reservation</p></div>
+          <% else %>
+          <div><p class="btn btn-primary">Accept</p></div>
+          <div><p class="btn btn-warning">Decline</p></div>
+          <% end %>
+        </div>
+      </div>
+       <div class="ligne"></div>
+      <div class="card-dashboard">
+        <div><img src="https://statics.lesinrocks.com/content/thumbs/uploads/2018/06/width-1125-height-612/edouard-louis-c-arnaud-delrue.jpg" alt=""></div>
+        <div class="text-dashboard col-sm-9">
+          <div class="top-card-dashboard">
+            <div class="name"><h3>Jim la Malice</h3></div>
+            <div class="date"><p>From 20/08/2019 at 5pm to 20/08/2019 at 8pm</p></div>
+          </div>
+          <div class="description-dash"><p>Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem, sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant, quae Isauriae scopulis sunt controversa.</p></div>
+        </div>
+        <div class="button">
+          <% if @user.is_q == false %>
+          <div><p class="btn btn-primary">Cancel the reservation</p></div>
+          <% else %>
+          <div><p class="btn btn-primary">Accept</p></div>
+          <div><p class="btn btn-warning">Decline</p></div>
+          <% end %>
+        </div>
+      </div>
+       <div class="ligne"></div>
+      <div class="card-dashboard mb-0 pb-0">
+        <div><img src="https://statics.lesinrocks.com/content/thumbs/uploads/2018/06/width-1125-height-612/edouard-louis-c-arnaud-delrue.jpg" alt=""></div>
+        <div class="text-dashboard col-sm-9">
+          <div class="top-card-dashboard">
+            <div class="name"><h3>Jim la Malice</h3></div>
+            <div class="date"><p>From 20/08/2019 at 5pm to 20/08/2019 at 8pm</p></div>
+          </div>
+          <div class="description-dash"><p>Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem, sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant, quae Isauriae scopulis sunt controversa.</p></div>
+        </div>
+        <div class="button">
+          <% if @user.is_q == false %>
+          <div><p class="btn btn-primary">Cancel the reservation</p></div>
+          <% else %>
+          <div><p class="btn btn-primary">Accept</p></div>
+          <div><p class="btn btn-warning">Decline</p></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render "footer" %>
