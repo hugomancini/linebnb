@@ -1,4 +1,32 @@
-<h1>All Queuers:</h1>
-<% @queuers.each do |queuer| %>
-<h2><%= link_to queuer.user.name, queuer_path(queuer) %></h2>
-<% end %>
+<%= render "header" %>
+
+<h1 class="title-banner toop", style="padding-top: 100px;">
+  Plenty of queuers happy to wait!
+</h1>
+
+<div class="grid">
+  <% @queuers.each do |queuer| %>
+  <div class="card-queuer">
+    <div class="card-queuer-picture-container">
+      <%= image_tag queuer.user.picture.url, size: "100x100", class: "queuer-picture-animation" %>
+      <%= link_to queuer_path(queuer) do %>
+        <i class="fas fa-eye first-icon", style="display: none;"></i>
+      <% end %>
+      <%= link_to queuer_path(queuer) do %>
+        <i class="fas fa-forward second-icon", style="display: none;"></i>
+      <% end %>
+    </div>
+    <div class="card-queuer-infos">
+      <div>
+        <h2><%= link_to queuer.user.name, queuer_path(queuer) %></h2>
+        <p><b>Radius of action:</b> <%= queuer.address %></p>
+      </div>
+      <h2 class="card-queuer-pricing">€<%= queuer.price_per_hour %></%>/hour</h2>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<%= render "footer" %>
+
+
