@@ -1,24 +1,19 @@
 class ReviewsController < ApplicationController
 
-  def show
-    @user = User.find(params[:id])
-    if @user.is_q?
-      @queuer = @user.queuer
-      @reviews = @user.reviews
-    else
-      @reviews = @user.reviews
-    end
+  before_action :set_reservation
+  before_action :set_queuer, only: [:index, :create]
+
+  def index
+    @reviews = @queuer.reviews
   end
 
   def new
-    @review = Review.new()
+    @review = Review.new
   end
 
   def create
-    @reservation = Reservation.find(params[:id])
-    @user = @reservation.user
-    @queuer = @reservation.queuer
-    @review = Review.new(params[:reservation_id])
+    @user = current_user
+    @review = Review.new(review_params)
     @review.reservation = @reservation
     @review.user = @user
     if @review.save
@@ -28,17 +23,18 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit
-    @reservation = Reservation.find(params[:id])
+  private
 
+  def review_params
+    params.require(:review).permit(:content, :rating)
   end
 
-  def update
-
+  def set_reservation
+    @reservation = Reservation.find(params[:reservation_id])
   end
 
-  def destroy
-
+  def set_queuer
+    @queuer = @reservation.queuer
   end
 
 end
