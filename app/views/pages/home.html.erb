@@ -3,6 +3,9 @@
 <div class="modal-login">
   <%=  render "devise/sessions/newsession" %>
 </div>
+<div class="modal-signin">
+  <%=  render "devise/registrations/newregistration" %>
+</div>
 
 <div class="mybody">
   <div class="banner">
@@ -44,7 +47,7 @@
       <h2 class="middle-text">umeram mentibus ardore quodam infuso</h2>
     </div>
     <div>
-      <%= link_to "Inscrivez-vous", new_user_registration_path, class: "btn btn-warning" %>
+      <%= link_to "Search for a Queuer", queuers_path, class: "btn btn-warning" %>
     </div>
   </div>
 </div>
@@ -66,4 +69,4 @@
 </div>
 </div>
 
-<%=  render "footer" %>
+<%= render "footer" %>

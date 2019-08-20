@@ -1,22 +1,20 @@
 <%= render "header" %>
 
 <div class="banner-profil">
-  <%= image_tag @user.picture.url %>
+  <% if @user.picture.url != nil %><%= image_tag @user.picture.url %><% else %><img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt=""> <% end %>
 </div>
+<div class="container-edit">
+    <%= render "edit-form" %>
+  </div>
 <div class="container-profil">
   <div class="col-sm-3 margintop">
     <div class="container-card-profil">
-      <div><img src="<%= current_user.picture %>" alt="profile picture"></div>
+      <div> <% if @user.picture.url != nil %><%= image_tag @user.picture.url %> <% else %> <img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt=""><% end %></div>
       <div class="info-profil">
         <div class="name"><h2><%= current_user.name %></h2></div>
-        <div class="stars"><h3> <% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></h3></div>
+        <div class="stars"><% if current_user.rating != nil %><h3> <% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></h3> <% else %> <% 5.times do %> <i class="far fa-star"></i> <% end %><% end %></div>
       </div>
-      <div class="description">
-      <% if current_user.description == nil || current_user.description == ""  %>
-        <p>Edit your profile to add description</p>
-        <% else %>
-        <p><%= current_user.description %></p><% end %>
-      </div>
+      <div class="description"><p><%= current_user.description %></p></div>
       <div class="card-profil-bottom">
         <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", user_queuers_path(@user), class: "btn btn-warning" %></div> <% end %>
         <div class="edit-part"><h4><%= link_to edit_user_path do %><i class="fas fa-user-edit"></i><% end %></h4></div>
@@ -32,7 +30,7 @@
         <div class="comment-card">
           <div class="comment-top">
             <div class="user-comment">
-              <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
+              <div><% if review.user.picture.url != nil %><%= image_tag review.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
               <div><%= review.user.name %></p></div>
             </div>
             <div><p><% review.user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((review.user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
@@ -51,10 +49,10 @@
         <div class="comment-card">
           <div class="comment-top">
             <div class="user-comment">
-              <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
+              <div><% if review.user.picture.url != nil %><%= image_tag review.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
               <div><%= review.user.name %></p></div>
             </div>
-            <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
+            <div><p><% review.user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((review.user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
           </div>
           <div class="comment-content">
             <p><%= review.content %></p>
@@ -77,7 +75,7 @@
       <% if @user.is_q %>
       <% @reservations_as_queuer.each do |reservation| %>
       <div class="card-dashboard queuer">
-        <div><%= image_tag reservation.user.picture.url %></div>
+        <div><% if reservation.user.picture.url != nil %><%= image_tag rreservation.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
         <div class="text-dashboard col-sm-9">
           <div class="top-card-dashboard">
             <div class="name"><h3><%= reservation.user.name %></h3></div>
@@ -102,7 +100,7 @@
       <% end %>
       <% @reservations_as_user.each do |reservation| %>
       <div class="card-dashboard user">
-        <div><%= image_tag reservation.queuer.user.picture.url %></div>
+        <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag rreservation.queuer.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
         <div class="text-dashboard col-sm-9">
           <div class="top-card-dashboard">
             <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
