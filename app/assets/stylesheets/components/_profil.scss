@@ -34,6 +34,10 @@
   }
 }
 
+.edit-part a {
+  color: #7F0400;
+}
+
 .big-dash-container {
   h2 {
     color: white;
@@ -62,7 +66,7 @@
     padding-bottom: 5px;
   }
   img {
-    max-height: 250px;
+    height: 250px;
     width: 100%;
     object-fit:cover;
   }
@@ -220,3 +224,19 @@
     margin-bottom: 0px;
   }
 }
+
+.container-edit {
+  display: block;
+  position: absolute;
+  width: 40%;
+  background-color: white;
+  padding: 30px;
+  margin: 0 auto;
+  z-index: 100;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 10%;
+}
+
+
+
