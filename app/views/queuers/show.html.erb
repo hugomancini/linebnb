@@ -1,18 +1,36 @@
 <%= render "header" %>
 
-<div class="container">
+<div class="container queuer-show-container">
   <div class="row">
-    <div class="col-8 offset-2">
-  <h1 class="text-center">This particular Queuer:</h1>
-  <div class="container-card-queuer"><
-    <h3><%= @queuer.user.name %></h3>
-    <p><%= @queuer.address %> for a perimeter of <%= @queuer.radius %>km.</p>
-    <h4><%= link_to "Back", queuers_path %></h4>
-    <h4><%= link_to "Edit", edit_queuer_path(@queuer) %></h4>
-    <h4><%= link_to "Delete", queuer_path(@queuer), method: :delete %></h4>
-
-    <h4><%= link_to "Create Reservation", new_queuer_reservation_path(@queuer) %></h4>
+    <div class="col-6 offset-3">
+      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.frandroid.com/wp-content/uploads/2016/01/google-maps.png)">
+          <h1 class="text-center"><%= @queuer.user.name  %></h1>
       </div>
+      <div class="container-card-queuer p-2">
+            <p><%= @queuer.address %> for a perimeter of <%= @queuer.radius %>km.</p>
+            <div class="container, d-flex justify-content-between p-2">
+            <div>
+              <%= link_to  queuers_path do %>
+              <li class="btn btn-ghost">Back</li>
+              <% end %>
+            </div>
+            <div>
+              <%= link_to  edit_queuer_path(@queuer) do %>
+              <li class="btn btn-flat-green">Edit</li>
+              <% end %>
+            </div>
+             <div>
+              <%= link_to  queuer_path(@queuer), method: :delete do %>
+              <li class="btn btn-flat-red">Delete</li>
+              <% end %>
+            </div>
+             <div>
+              <%= link_to  new_queuer_reservation_path(@queuer) do %>
+              <li class="btn btn-flat-blue">Reserve</li>
+              <% end %>
+            </div>
+            </div>
+       </div>
     </div>
   </div>
 </div>
