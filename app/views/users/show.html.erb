@@ -1,15 +1,15 @@
 <%= render "header" %>
 
 <div class="banner-profil">
-  <%= image_tag @user.picture.url %>
+  <% if @user.picture.url != nil %><%= image_tag @user.picture.url %><% else %><img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt=""> <% end %>
 </div>
 <div class="container-profil">
   <div class="col-sm-3 margintop">
     <div class="container-card-profil">
-      <div><%= image_tag @user.picture.url %></div>
+      <div> <% if @user.picture.url != nil %><%= image_tag @user.picture.url %> <% else %> <img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt=""><% end %></div>
       <div class="info-profil">
         <div class="name"><h2><%= current_user.name %></h2></div>
-        <div class="stars"><h3> <% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></h3></div>
+        <div class="stars"><% if current_user.rating != nil %><h3> <% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></h3> <% else %> <% 5.times do %> <i class="far fa-star"></i> <% end %><% end %></div>
       </div>
       <div class="description"><p><%= current_user.description %></p></div>
       <div class="card-profil-bottom">
