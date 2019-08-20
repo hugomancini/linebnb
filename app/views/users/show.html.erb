@@ -6,12 +6,17 @@
 <div class="container-profil">
   <div class="col-sm-3 margintop">
     <div class="container-card-profil">
-      <div><%= image_tag @user.picture.url %></div>
+      <div><img src="<%= current_user.picture %>" alt="profile picture"></div>
       <div class="info-profil">
         <div class="name"><h2><%= current_user.name %></h2></div>
         <div class="stars"><h3> <% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></h3></div>
       </div>
-      <div class="description"><p><%= current_user.description %></p></div>
+      <div class="description">
+      <% if current_user.description == nil || current_user.description == ""  %>
+        <p>Edit your profile to add description</p>
+        <% else %>
+        <p><%= current_user.description %></p><% end %>
+      </div>
       <div class="card-profil-bottom">
         <% if @user.is_q == false %> <div><%= link_to "Become a Queuer!", user_queuers_path(@user), class: "btn btn-warning" %></div> <% end %>
         <div class="edit-part"><h4><%= link_to edit_user_path do %><i class="fas fa-user-edit"></i><% end %></h4></div>
