@@ -1,16 +1,16 @@
 <%= render "header" %>
 
 <div class="banner-profil">
-  <img src="https://www.emavie.com/wp-content/uploads/2016/03/devenir-graphiste-8.jpg" alt="">
+  <%= image_tag @user.picture.url %>
 </div>
 
 <div class="container-profil">
   <div class="col-sm-3 margintop">
     <div class="container-card-profil">
-      <div><img src="https://www.emavie.com/wp-content/uploads/2016/03/devenir-graphiste-8.jpg" alt=""></div>
+      <div><%= image_tag @user.picture.url %></div>
       <div class="info-profil">
         <div class="name"><h2><%= current_user.name %></h2></div>
-        <div class="stars"><h3><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></h3></div>
+        <div class="stars"><h3> <% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></h3></div>
       </div>
       <div class="description"><p><%= current_user.description %></p></div>
       <div class="card-profil-bottom">
@@ -19,117 +19,65 @@
       </div>
     </div>
 
-    <div class="comment-container">
+    <% i = 0 %>
+    <% @reviews.each do |review| %>
+    <% if review.user != current_user %>
+    <% i += 1 %>
+    <div class="comment-container <% if i > 2 %> hide-comment <% end %>">
       <div class="comment-card">
         <div class="comment-top">
           <div class="user-comment">
-            <div><img src="http://www.centredecrisebsl.qc.ca/wp-content/uploads/2016/10/page-3.jpg" alt="" class="avatar"></div>
-            <div><p>Emilie P.</p></div>
+            <div><%= image_tag review.user.picture.url, class: "avatar" %></div>
+            <div><%= review.user.name %></p></div>
           </div>
-          <div><p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></i><i class="far fa-star"></i><i class="far fa-star"></i></p></div>
+          <div><p><% current_user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((current_user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
         </div>
         <div class="comment-content">
-          <p>Suis laribus in stipe tamquam noxii in timebatur quoque converso cruentam puniti victitabant claudebantur quoque.</p>
+          <p><%= review.content %></p>
         </div>
       </div>
     </div>
-    <div class="comment-container">
-      <div class="comment-card">
-        <div class="comment-top">
-          <div class="user-comment">
-            <div><img src="http://www.centredecrisebsl.qc.ca/wp-content/uploads/2016/10/page-3.jpg" alt="" class="avatar"></div>
-            <div><p>Emilie P.</p></div>
-          </div>
-          <div><p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></i><i class="far fa-star"></i><i class="far fa-star"></i></p></div>
-        </div>
-        <div class="comment-content">
-          <p>Suis laribus in stipe tamquam noxii in timebatur quoque converso cruentam puniti victitabant claudebantur quoque.</p>
-        </div>
+    <% end %>
+    <% end %>
+
+    <% if @reviews.length != 0 && i > 2 %>
+      <div class="arrow">
+        <h2><i class="fas fa-2x fa-sort-down"></i></h2>
       </div>
-    </div>
-    <div class="arrow">
-      <h2><i class="fas fa-2x fa-sort-down"></i></h2>
-    </div>
+    <% end %>
   </div>
 
   <div class="col-sm-6 margintopmega big-dash-container">
     <h2>Dashboard</h2>
     <div class="container-card-dashboard">
+      <% if @user.is_q %>
+      <% @queuer.reservations.each do |reservation| %>
       <div class="card-dashboard">
-        <div><img src="https://statics.lesinrocks.com/content/thumbs/uploads/2018/06/width-1125-height-612/edouard-louis-c-arnaud-delrue.jpg" alt=""></div>
+        <div><%= image_tag reservation.user.picture.url %></div>
         <div class="text-dashboard col-sm-9">
           <div class="top-card-dashboard">
-            <div class="name"><h3>Jim la Malice</h3></div>
-            <div class="date"><p>From 20/08/2019 at 5pm to 20/08/2019 at 8pm</p></div>
+            <div class="name"><h3><%= reservation.user.name %></h3></div>
+            <div class="date"><p>From <%= reservation.starts_at %> to reservation.ends_at 8pm</p></div>
           </div>
-          <div class="description-dash"><p>Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem, sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant, quae Isauriae scopulis sunt controversa.</p></div>
+          <div class="description-dash"><p><%= reservation.content %></p></div>
         </div>
         <div class="button">
-          <% if @user.is_q == false %>
-          <div><p class="btn btn-primary">Cancel the reservation</p></div>
+          <% if @user.is_q == true && reservation.statut == "waiting" %>
+            <div><p class="btn btn-primary">Accept</p></div>
+            <div><p class="btn btn-warning">Decline</p></div>
+          <% elsif @user.is_q == false && reservation.statut == "waiting" %>
+            <div><p class="btn btn-primary">Cancel the reservation</p></div>
+          <% elsif @user.is_q == true && reservation.statut == "process" %>
+            <div><p class="btn btn-primary">Confirm</p></div>
+          <% elsif @user.is_q == false && reservation.statut == "process" %>
+            <div><p class="btn btn-warning">In process</p></div>
           <% else %>
-          <div><p class="btn btn-primary">Accept</p></div>
-          <div><p class="btn btn-warning">Decline</p></div>
+          <div><p class="btn btn-warning">Finished</p></div>
           <% end %>
         </div>
       </div>
-      <div class="ligne"></div>
-      <div class="card-dashboard">
-        <div><img src="https://statics.lesinrocks.com/content/thumbs/uploads/2018/06/width-1125-height-612/edouard-louis-c-arnaud-delrue.jpg" alt=""></div>
-        <div class="text-dashboard col-sm-9">
-          <div class="top-card-dashboard">
-            <div class="name"><h3>Jim la Malice</h3></div>
-            <div class="date"><p>From 20/08/2019 at 5pm to 20/08/2019 at 8pm</p></div>
-          </div>
-          <div class="description-dash"><p>Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem, sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant, quae Isauriae scopulis sunt controversa.</p></div>
-        </div>
-        <div class="button">
-          <% if @user.is_q == false %>
-          <div><p class="btn btn-primary">Cancel the reservation</p></div>
-          <% else %>
-          <div><p class="btn btn-primary">Accept</p></div>
-          <div><p class="btn btn-warning">Decline</p></div>
-          <% end %>
-        </div>
-      </div>
-       <div class="ligne"></div>
-      <div class="card-dashboard">
-        <div><img src="https://statics.lesinrocks.com/content/thumbs/uploads/2018/06/width-1125-height-612/edouard-louis-c-arnaud-delrue.jpg" alt=""></div>
-        <div class="text-dashboard col-sm-9">
-          <div class="top-card-dashboard">
-            <div class="name"><h3>Jim la Malice</h3></div>
-            <div class="date"><p>From 20/08/2019 at 5pm to 20/08/2019 at 8pm</p></div>
-          </div>
-          <div class="description-dash"><p>Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem, sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant, quae Isauriae scopulis sunt controversa.</p></div>
-        </div>
-        <div class="button">
-          <% if @user.is_q == false %>
-          <div><p class="btn btn-primary">Cancel the reservation</p></div>
-          <% else %>
-          <div><p class="btn btn-primary">Accept</p></div>
-          <div><p class="btn btn-warning">Decline</p></div>
-          <% end %>
-        </div>
-      </div>
-       <div class="ligne"></div>
-      <div class="card-dashboard mb-0 pb-0">
-        <div><img src="https://statics.lesinrocks.com/content/thumbs/uploads/2018/06/width-1125-height-612/edouard-louis-c-arnaud-delrue.jpg" alt=""></div>
-        <div class="text-dashboard col-sm-9">
-          <div class="top-card-dashboard">
-            <div class="name"><h3>Jim la Malice</h3></div>
-            <div class="date"><p>From 20/08/2019 at 5pm to 20/08/2019 at 8pm</p></div>
-          </div>
-          <div class="description-dash"><p>Cognitis enim pilatorum caesorumque funeribus nemo deinde ad has stationes appulit navem, sed ut Scironis praerupta letalia declinantes litoribus Cypriis contigui navigabant, quae Isauriae scopulis sunt controversa.</p></div>
-        </div>
-        <div class="button">
-          <% if @user.is_q == false %>
-          <div><p class="btn btn-primary">Cancel the reservation</p></div>
-          <% else %>
-          <div><p class="btn btn-primary">Accept</p></div>
-          <div><p class="btn btn-warning">Decline</p></div>
-          <% end %>
-        </div>
-      </div>
+      <% end %>
+      <% end %>
     </div>
   </div>
 </div>

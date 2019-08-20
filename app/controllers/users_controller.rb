@@ -2,6 +2,14 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def show
+    if current_user.is_q
+      @queuer = Queuer.find_by(user: current_user)
+    end
+    @reservations = Reservation.where(queuer: @queuer)
+    @reviews = []
+    @reservations.each do |reservation|
+      @reviews << reservation
+    end
   end
 
   def new
