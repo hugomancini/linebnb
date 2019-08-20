@@ -2,6 +2,11 @@
   position: relative;
 }
 
+.dark {
+  filter: brightness(30%);
+  background-color: gray;
+}
+
 .banner::before {
   background-image : url(https://besthqwallpapers.com/Uploads/7-5-2018/51388/hourglass-4k-time-concept-close-up-clock.jpg);
   background-size: cover;
@@ -10,6 +15,17 @@
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
+}
+
+.modal-login {
+  display: none;
+  background-color: white;
+  padding: 30px;
+  width: 40%;
+  left: 30%;
+  top: 18%;
+  position: absolute;
+  z-index:100;
 }
 
 .banner-image {

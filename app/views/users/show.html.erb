@@ -44,6 +44,10 @@
             <div class="comment-content">
               <p><%= review.content %></p>
             </div>
+            <div><p><% review.user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((review.user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
+          </div>
+          <div class="comment-content">
+            <p><%= review.content %></p>
           </div>
         </div>
         <% end %>
