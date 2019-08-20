@@ -1,16 +1,18 @@
-<%= render "header" %>
+<div class="placebo-search">
+  <img src="https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/wp-cms/uploads/2019/08/p-1-90388493-these-5-great-alternative-search-engines-do-what-google-cant.jpg" alt="">
+</div>
 
-<h1 class="title-banner toop", style="padding-top: 100px;">
-  Plenty of queuers happy to wait!
-</h1>
-
-<div class="grid">
+<div class="container grid-queuer">
+  <h1 class="title-banner toop", style="padding-top: 100px;">
+    Plenty of queuers happy to wait!
+  </h1>
+  <div class="grid">
   <% @queuers.each do |queuer| %>
-  <div class="card-queuer">
+  <div class="card-queuer" data-aos="fade-up" data-aos-duration="1000">
     <div class="card-queuer-picture-container">
       <%= image_tag queuer.user.picture.url, size: "100x100", class: "queuer-picture-animation" %>
       <%= link_to queuer_path(queuer) do %>
-        <i class="fas fa-eye first-icon", style="display: none;"></i>
+        <img src="https://cdn.shopify.com/s/files/1/2828/2118/files/eyeball-01-01_300x300.png?v=1517086367" class="fas fa-eye first-icon", style="display: none;">
       <% end %>
       <%= link_to queuer_path(queuer) do %>
         <i class="fas fa-forward second-icon", style="display: none;"></i>
@@ -26,7 +28,6 @@
   </div>
   <% end %>
 </div>
-
-<%= render "footer" %>
+</div>
 
 

@@ -31,8 +31,11 @@
 .first-icon {
   position: absolute;
   bottom: 85px;
-  left: 40%;
+  left: 30%;
   font-size: 30px;
+  width: 40px;
+  height: 30px;
+  object-fit:cover;
 }
 
 .second-icon {
@@ -40,6 +43,7 @@
   bottom: 85px;
   left: 60%;
   font-size: 30px;
+  color:white;
 }
 
 .card-queuer h2 {
