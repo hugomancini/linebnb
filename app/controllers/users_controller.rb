@@ -2,6 +2,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def show
+    if current_user.is_q
+      @queuer = Queuer.find_by(user: current_user)
+      @reservations_as_queuer = Reservation.where(queuer: @queuer)
+      @reviews_as_queuer = @queuer.reviews
+    end
+    @reservations_as_user = Reservation.where(user: current_user)
+    @reviews_as_user = current_user.reviews
   end
 
   def new
