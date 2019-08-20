@@ -238,5 +238,18 @@
   margin-top: 10%;
 }
 
+.darker {
+  filter: brightness(30%);
+  background-color: gray;
+}
 
-
+.modal-edit {
+  display: none;
+  background-color: white;
+  padding: 30px;
+  width: 40%;
+  left: 30%;
+  top: 10%;
+  position: absolute;
+  z-index:100;
+}
