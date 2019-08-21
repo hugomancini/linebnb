@@ -73,3 +73,18 @@
   top: -20px;
   width: 40px;
 }
+
+
+.default-display {
+  display: none;
+}
+
+.card-queuer-picture-container:hover {
+  .image {
+    filter: brightness(50%);
+    transition-duration: 1s;
+  }
+  .default-display {
+    display: block;
+  }
+}

@@ -16,20 +16,24 @@ class QueuersController < ApplicationController
   end
 
   def new
+    @user = current_user
     @queuer = Queuer.new
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = current_user
     @user.is_q = true
     @queuer = Queuer.new(queuer_params)
     @queuer.user = @user
     @queuer.save
+    @user.save
     redirect_to queuer_path(@queuer)
   end
 
   def edit
-    @queuer = Queuer.find(params[:id])
+    @user = current_user
+    @queuer = @user.queuer
+    raise
   end
 
   def update

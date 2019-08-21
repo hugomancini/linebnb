@@ -11,6 +11,7 @@
 @import "cardsami";
 @import "buttons";
 @import "map";
+@import "queuer-show";
 
 
   h1 {
@@ -31,6 +32,7 @@
 
 body {
   height: 100vh;
+  overflow-x:hidden;
 }
 
 [data-aos^=fade][data-aos^=fade] {
@@ -44,6 +46,14 @@ body {
 }
 
 .container-profil {
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.container-queuer {
+  padding-top: 20vh;
   width: 100%;
   display:flex;
   justify-content: center;

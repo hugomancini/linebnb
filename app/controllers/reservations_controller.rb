@@ -27,8 +27,8 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @queuer = Queuer.find(params[:queuer_id])
     @user = current_user
+    @queuer = Queuer.find(params[:queuer_id])
     @reservation = Reservation.new
   end
 
