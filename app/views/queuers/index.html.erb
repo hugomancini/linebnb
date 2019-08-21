@@ -19,9 +19,7 @@
         <%= link_to queuer_path(queuer) do %>
           <img src="https://cdn.shopify.com/s/files/1/2828/2118/files/eyeball-01-01_300x300.png?v=1517086367" class="fas fa-eye first-icon">
         <% end %>
-        <%= link_to new_queuer_reservation_path(queuer) do %>
-          <i class="fas fa-forward second-icon"></i>
-        <% end %>
+          <i class="fas fa-forward second-icon" data-toggle="modal" data-target="#newresModal"></i>
       </div>
     </div>
     <div class="card-queuer-infos">
@@ -34,4 +32,26 @@
   </div>
   <% end %>
 </div>
+</div>
+
+<div class="modal fade" id="newresModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Book your Queuer!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for [@queuer, @reservation] do |f| %>
+          <%= f.input :starts_at %>
+          <%= f.input :ends_at %>
+          <%= f.input :content %>
+          <%= f.input :address %>
+          <%= f.submit class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
