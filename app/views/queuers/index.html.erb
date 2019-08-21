@@ -11,12 +11,12 @@
   <div class="card-queuer" data-aos="fade-up" data-aos-duration="1000">
     <div class="card-queuer-picture-container">
       <%= image_tag queuer.user.picture.url, size: "100x100", class: "queuer-picture-animation" %>
-      <%= link_to queuer_path(queuer) do %>
-        <img src="https://cdn.shopify.com/s/files/1/2828/2118/files/eyeball-01-01_300x300.png?v=1517086367" class="fas fa-eye first-icon", style="display: none;">
-      <% end %>
-      <%= link_to queuer_path(queuer) do %>
-        <i class="fas fa-forward second-icon", style="display: none;"></i>
-      <% end %>
+      <div class="default-display" >
+        <%= link_to queuer_path(queuer) do %>
+          <img src="https://cdn.shopify.com/s/files/1/2828/2118/files/eyeball-01-01_300x300.png?v=1517086367" class="fas fa-eye first-icon">
+        <% end %>
+          <i data-toggle="modal" data-target="#newresModal" class="fas fa-forward second-icon"></i>
+      </div>
     </div>
     <div class="card-queuer-infos">
       <div>
@@ -29,5 +29,7 @@
   <% end %>
 </div>
 </div>
+
+<!-- Modal Reservation-->
 
 
