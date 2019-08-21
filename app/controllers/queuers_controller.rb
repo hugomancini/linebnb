@@ -4,9 +4,9 @@ class QueuersController < ApplicationController
     @queuers_geocoded = Queuer.geocoded
     @markers = @queuers_geocoded.map do |queuer|
       {
-        lat: flat.latitude,
-        lng: flat.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { flat: flat })
+        lat: queuer.latitude,
+        lng: queuer.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { queuer: queuer })
       }
     end
   end
