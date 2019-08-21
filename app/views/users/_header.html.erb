@@ -19,14 +19,10 @@
         </div>
       <% else %>
         <div>
-          <%= link_to new_user_registration_path do %>
-          <li class="nav-item active">Sign in</li>
-          <% end %>
+          <li class="nav-item active signin" data-toggle="modal" data-target="#signinModal">Sign in</li>
         </div>
         <div>
-          <%= link_to new_user_session_path do %>
-          <li class="nav-item active">Login</li>
-          <% end %>
+          <li class="nav-item active login" data-toggle="modal" data-target="#loginModal">Login</li>
         </div>
       <% end %>
     </ul>
