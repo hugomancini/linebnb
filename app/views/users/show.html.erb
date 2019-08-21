@@ -21,27 +21,53 @@
   </div>
 </div>
 
-<div class="modal fade" id="queuerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Enter your Queuer Info !</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <%= simple_form_for [@user, Queuer.new] do |f| %>
-       <%= f.input :address %>
-       <%= f.input :description %>
-       <%= f.input :radius %>
-       <%= f.input :price_per_hour, label: "Price per Hour" %>
-       <%= f.submit "Create Queuer", class: "btn btn-primary" %>
-      <% end %>
+<%  if current_user.is_q? == false %>
+  <div class="modal fade" id="queuerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enter your Queuer Info !</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <%= simple_form_for [@user, Queuer.new] do |f| %>
+         <%= f.input :address %>
+         <%= f.input :description %>
+         <%= f.input :radius %>
+         <%= f.input :price_per_hour, label: "Price per Hour" %>
+         <%= f.submit "Create Queuer", class: "btn btn-primary" %>
+        <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
+
+<%  if current_user.is_q?%>
+  <div class="modal fade" id="editqueuerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit your queuer info</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <%= simple_form_for(@queuer) do |f| %>
+          <%= f.input :address %>
+          <%= f.input :description %>
+          <%= f.input :radius %>
+          <%= f.input :price_per_hour %>
+          <%= f.submit "Edit Queuer", class: "btn btn-primary" %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <div class="modal fade" id="editqueuerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -64,6 +90,27 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="newcommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter your review !</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <%= simple_form_for [Reservation.find(params[:id]), Review.new] do |f| %>
+         <%= f.input :content %>
+         <%= f.input :rating, collections: Review::RATING %>
+         <%= f.submit %>
+       <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="banner-profil">
   <% if @user.picture.url != nil %><%= image_tag @user.picture.url %><% else %><img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt=""> <% end %>
@@ -156,7 +203,7 @@
           <% elsif reservation.statut == "aborted" || reservation.statut == "declined" %>
             <div><a href="#" class="btn btn-danger">Aborted</a></div>
           <% else %>
-          <div><%= link_to "Comment", new_reservation_review_path(reservation), class: "btn btn-warning" %></div>
+          <div class="btn btn-warning" data-toggle="modal" data-target="#newcommentModal">Comment</div>
           <% end %>
         </div>
       </div>
@@ -180,7 +227,7 @@
           <% elsif reservation.statut == "aborted" %>
             <div><p class="btn btn-danger">Aborted</p></div>
           <% else %>
-          <div><%= link_to "Comment", new_reservation_review_path(reservation), class: "btn btn-warning" %></div>
+          <div class="btn btn-warning" data-toggle="modal" data-target="#newcommentModal">Comment</div>
           <% end %>
         </div>
       </div>

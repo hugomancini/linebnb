@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
   end
 
   def set_reservation
-    @reservation = Reservation.find(params[:reservation_id])
+    @reservation = Reservation.find(params[:id])
   end
 
   def set_queuer
