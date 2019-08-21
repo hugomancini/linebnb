@@ -1,6 +1,14 @@
 class QueuersController < ApplicationController
   def index
     @queuers = Queuer.all
+    @queuers_geocoded = Queuer.geocoded
+    @markers = @queuers_geocoded.map do |queuer|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { flat: flat })
+      }
+    end
   end
 
   def show
