@@ -1,5 +1,27 @@
 <!-- Modal -->
 
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit your profile info!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <%= simple_form_for [@user] do |f| %>
+         <%= f.input :name, label: 'Fullname', :input_html => { :value => current_user.name } %>
+         <%= f.input :picture, label: 'Profile picture' %>
+         <%= f.input :picture_cache, as: :hidden %>
+         <%= f.input :description, label: 'Description' %>
+         <%= f.submit "validate", class: "btn btn-primary" %>
+       <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <%  if current_user.is_q? == false %>
   <div class="modal fade" id="queuerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -48,6 +70,7 @@
   </div>
 <% end %>
 
+<% if @reservation != nil  %>
 <div class="modal fade" id="newcommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -67,6 +90,7 @@
     </div>
   </div>
 </div>
+<% end %>
 
 <div class="banner-profil">
   <% if @user.picture.url != nil %><%= image_tag @user.picture.url %><% else %><img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt=""> <% end %>
@@ -82,14 +106,14 @@
       </div>
       <div class="description"><p><%= current_user.description %></p></div>
       <div class="card-profil-bottom">
-        <% if @user.is_q == false %> <div class="btn btn-primary button" data-toggle="modal" data-target="#queuerModal">Become a Queuer!</div> <% else %> <div class="btn btn-primary button" data-toggle="modal" data-target="#editqueuerModal">Edit Queuer Info</div><% end %>
+        <% if @user.is_q? == false %> <div class="btn btn-primary button" data-toggle="modal" data-target="#queuerModal">Become a Queuer!</div> <% else %> <div class="btn btn-primary button" data-toggle="modal" data-target="#editqueuerModal">Edit Queuer Info</div><% end %>
         <div class="edit-part"><h4><i data-toggle="modal" data-target="#editModal" class="fas fa-user-edit"></i></h4></div>
 
       </div>
     </div>
 
     <% i = 0 %>
-    <% if current_user.is_q %>
+    <% if current_user.is_q? %>
       <% @reviews_as_queuer.each do |review| %>
       <% if review.user != current_user %>
       <% i += 1 %>
@@ -140,7 +164,7 @@
   <div class="col-sm-6 margintopmega big-dash-container" data-aos="fade-left" data-aos-duration="1000">
     <h2>Dashboard</h2>
     <div class="container-card-dashboard">
-      <% if @user.is_q %>
+      <% if @user.is_q? %>
       <% @reservations_as_queuer.each do |reservation| %>
       <div class="card-dashboard queuer">
         <div><% if reservation.user.picture.url != nil %><%= image_tag reservation.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
@@ -155,7 +179,7 @@
           <% if reservation.statut == "waiting" %>
             <div><%= link_to "Accept", statut_path(reservation), class: "btn btn-primary" %></div>
             <div><%= link_to "Decline", decline_path(reservation), class: "btn btn-warning" %></div>
-          <% elsif @user.is_q == true && reservation.statut == "process" %>
+          <% elsif @user.is_q? == true && reservation.statut == "process" %>
             <div><%= link_to "Confirm", statut_path(reservation), class: "btn btn-primary" %></div>
           <% elsif reservation.statut == "aborted" || reservation.statut == "declined" %>
             <div><a href="#" class="btn btn-danger">Aborted</a></div>
