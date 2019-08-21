@@ -1,0 +1,100 @@
+.comment-container-show {
+  .avatar {
+    height: 45px;
+    width: 45px;
+    object-fit:cover;
+    margin-right: 20px;
+  }
+}
+
+.price {
+  background-color: #008080;
+  border-radius: 100%;
+  width: 60px;
+  font-size: 10px;
+  color:white;
+  text-align: center;
+  position:absolute;
+  justify-content: flex-end;
+  align-self:flex-end;
+}
+
+.comment-card-show {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  background-color: white;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  padding: 20px;
+  .comment-top-show {
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom: 20px;
+    color: #008B8B;
+    p {
+      font-weight: bolder;
+    }
+  }
+  i {
+    color:  #B8860B;
+  }
+  .comment-content-show {
+    text-align: justify;
+  }
+}
+
+.user-comment-show {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  p {
+    padding-left: 20px;
+    margin-bottom: 0px;
+  }
+}
+
+.banner-queuer {
+  height: 30vh;
+  width: 100vw;
+  z-index:-1;
+  position:absolute;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit:cover;
+  }
+}
+
+.container-card-queuer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+  .name {
+    color:  #800000;
+    padding: 20px;
+    padding-bottom: 0px;
+    h2 {
+      font-weight: bolder;
+    }
+  }
+  .description {
+    text-align: justify;
+    padding: 20px;
+    padding-bottom: 5px;
+  }
+  img {
+    height: 250px;
+    width: 100%;
+    object-fit:cover;
+  }
+}
+
+.form-reservation {
+  background-color: white;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  padding: 20px;
+  position: sticky;
+  top: 16px;
+  height: 90%;
+}

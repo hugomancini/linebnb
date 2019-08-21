@@ -80,8 +80,9 @@
 }
 
 .card-queuer-picture-container:hover {
-  .queuer-picture-animation {
+  .image {
     filter: brightness(50%);
+    transition-duration: 1s;
   }
   .default-display {
     display: block;
