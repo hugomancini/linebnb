@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2019_08_21_092546) do
     t.string "name"
     t.string "picture"
     t.integer "rating"
-    t.boolean "is_q"
+    t.boolean "is_q", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
