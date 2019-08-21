@@ -30,6 +30,7 @@ class QueuersController < ApplicationController
     redirect_to queuer_path(@queuer)
   end
 
+
   def edit
     @user = current_user
     @queuer = @user.queuer
