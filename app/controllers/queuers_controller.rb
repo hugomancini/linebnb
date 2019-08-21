@@ -27,7 +27,7 @@ class QueuersController < ApplicationController
     @queuer.user = @user
     @queuer.save
     @user.save
-    redirect_to queuer_path(@queuer)
+    redirect_to user_path(@user)
   end
 
 

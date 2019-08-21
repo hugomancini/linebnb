@@ -1,9 +1,16 @@
- <h1>Add reservation</h1>
 
-<%= simple_form_for [@queuer, @reservation] do |f| %>
-  <%= f.input :starts_at %>
-  <%= f.input :ends_at %>
-  <%= f.input :content %>
-  <%= f.input :address %>
-  <%= f.submit class: "btn btn-danger" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-4 offset-4 new-res-form">
+     <h1>Add reservation</h1>
+
+    <%= simple_form_for [@queuer, @reservation] do |f| %>
+      <%= f.input :starts_at %>
+      <%= f.input :ends_at %>
+      <%= f.input :content %>
+      <%= f.input :address %>
+      <%= f.submit class: "btn btn-danger" %>
+    <% end %>
+    </div>
+  </div>
+</div>
