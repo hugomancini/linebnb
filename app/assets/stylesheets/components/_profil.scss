@@ -16,7 +16,7 @@
   justify-content:space-between;
   align-items:center;
   .stars {
-    padding: 20px;
+    padding: 10px;
     padding-bottom: 0px;
     color:  #B8860B;
   }
@@ -24,7 +24,7 @@
 
 .edit-part {
   width: 100%;
-  padding-right: 20px;
+  padding-right: 10px;
   align-self:flex-end;
   text-align: right;
   color: #8B4513;
@@ -32,6 +32,9 @@
   &:hover {
     opacity: 1;
     transition-duration: 1s;
+  }
+  h4 {
+    margin-bottom: 0px;
   }
 }
 
@@ -55,7 +58,7 @@
   margin-top: 60px;
   .name {
     color:  #800000;
-    padding: 20px;
+    padding: 10px;
     padding-bottom: 0px;
     h2 {
       font-weight: bolder;
@@ -63,7 +66,7 @@
   }
   .description {
     text-align: justify;
-    padding: 20px;
+    padding: 10px;
     padding-bottom: 5px;
   }
   img {
@@ -81,11 +84,8 @@
   display: flex;
   flex-direction:row;
   justify-content:space-between;
-  padding-left: 15px;
-  padding-bottom: 15px;
-  .btn {
-    width: 100%;
-  }
+  padding-left: 10px;
+  padding-bottom: 10px;
   .edit-part {
     max-width: 50px;
   }
@@ -122,7 +122,7 @@
   align-items:center;
   justify-content:center;
   .btn {
-    width: 100px;
+    width: 80px;
     text-align:center;
     align-self:center;
     margin-top: 10px;
