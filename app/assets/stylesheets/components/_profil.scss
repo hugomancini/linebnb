@@ -113,6 +113,10 @@
   }
   .btn {
     text-align: center;
+    p {
+      margin: 0px;
+      padding: 0px;
+    }
   }
 }
 
@@ -122,7 +126,7 @@
   align-items:center;
   justify-content:center;
   .btn {
-    width: 80px;
+    width: 110px;
     text-align:center;
     align-self:center;
     margin-top: 10px;
