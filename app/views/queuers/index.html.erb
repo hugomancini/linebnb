@@ -1,9 +1,11 @@
+<%= render './pages/signinmodal' %>
+
 <div class="placebo-search">
   <img src="https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/wp-cms/uploads/2019/08/p-1-90388493-these-5-great-alternative-search-engines-do-what-google-cant.jpg" alt="">
 </div>
 ​
 <div class="container grid-queuer">
-  <h1 class="title-banner toop", style="padding-top: 100px;">
+  <h1 class="title-banner toop", style="padding-top: 30px;">
     Plenty of queuers happy to wait!
   </h1>
   <div class="grid">
@@ -18,14 +20,15 @@
       <div class="default-display" >
         <%= link_to queuer_path(queuer) do %>
           <img src="https://cdn.shopify.com/s/files/1/2828/2118/files/eyeball-01-01_300x300.png?v=1517086367" class="fas fa-eye first-icon">
-        <% end %>
-          <i class="fas fa-forward second-icon" data-toggle="modal" data-target="#newresModal"></i>
+        <% end %> <%= link_to new_queuer_reservation_path(queuer) do  %>
+        <i class="fas fa-forward second-icon"></i> %>
+          <% end %>
       </div>
     </div>
     <div class="card-queuer-infos">
       <div>
         <h2><%= link_to queuer.user.name, queuer_path(queuer) %></h2>
-        <p><b>Radius of action:</b> <%= queuer.address %></p>
+        <p><b>Area:</b> <%= queuer.address %></p>
       </div>
       <h2 class="card-queuer-pricing">€<%= queuer.price_per_hour %></%>/hour</h2>
     </div>
@@ -34,24 +37,3 @@
 </div>
 </div>
 
-<div class="modal fade" id="newresModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Book your Queuer!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <%= simple_form_for [@queuer, @reservation] do |f| %>
-          <%= f.input :starts_at %>
-          <%= f.input :ends_at %>
-          <%= f.input :content %>
-          <%= f.input :address %>
-          <%= f.submit class: "btn btn-danger" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
