@@ -9,6 +9,7 @@ Review.destroy_all
 Reservation.destroy_all
 Queuer.destroy_all
 User.destroy_all
+ADDRESS = ["221 rue de tolbiac, paris", "16 villa gaudelet, paris", "9 rue oudinot, paris", "3 place d'italie, paris", "14 rue crespin du gast, paris", "30 boulevard saint-germain, paris", "30 boulevard de l'hopital, paris", "20 rue saint louis en l'ile, paris", "25 rue des ecoles, paris", "15 boulevard beaumarchais, paris", "2 rue de la bastille, paris", "112 avenue kleber, paris", "51 rue la boetie, paris", "54 rue de miromesnil, paris", "30 avnenue trudaine, paris", "12 rue de charonne, paris", "50 rue la fayette, paris", "121 boulevard haussmann, paris", "10 rue du renard, paris", "123 boulevard saint michel, paris", "12 rue gay-lussace, paris", "17 rue bonaparte, paris", "44 rue saint-antoine, paris"]
 
 url = "https://source.unsplash.com/random"
 15.times do
@@ -22,6 +23,7 @@ url = "https://source.unsplash.com/random"
   user.remote_picture_url = url
   user.save
 end
+
 
 15.times do
   desc = ""
@@ -38,7 +40,7 @@ end
     desca << Faker::Lorem.sentence
   end
 
-  queuer = Queuer.new(address: Faker::Address.full_address, description: desca, radius: rand(5...80), price_per_hour: rand(5...40), rating: rand(1..5))
+  queuer = Queuer.new(address: ADDRESS.sample, description: desca, radius: rand(5...80), price_per_hour: rand(5...40), rating: rand(1..5))
   queuer.user = usere
   queuer.save
 
