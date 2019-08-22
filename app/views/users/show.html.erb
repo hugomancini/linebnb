@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Modals -->
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -99,7 +99,7 @@
 </div>
 
 <div class="container-profil">
-  <div class="col-sm-3 margintop">
+  <div class="col-sm-3 offset-1 margintop">
     <div class="container-card-profil" data-aos="fade-right" data-aos-duration="1000">
       <div> <% if @user.picture.url != nil %><%= image_tag @user.picture.url %> <% else %> <img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt=""><% end %></div>
       <div class="info-profil">
@@ -164,12 +164,11 @@
   </div>
 
 
-
-<div class="row">
-  <div class="col-sm-10 offset-1 margintopmega big-dash-container" data-aos="fade-left" data-aos-duration="1000">
+<div class="row col-sm-8 offset-1">
+  <div class="col-sm-12 margintopmega big-dash-container" data-aos="fade-left" data-aos-duration="1000">
     <h2>Dashboard</h2>
     <div class="dash-tabs">
-      <ul class="nav nav-pills mb-3" id="reservations-tab" role="tablist">
+      <ul class="nav nav-pills mb-1" id="reservations-tab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="accepted-tab" data-toggle="pill" href="#accepted" role="tab" aria-controls="pills-home" aria-selected="true">Accepted</a>
         </li>
@@ -183,7 +182,7 @@
           <a class="nav-link" id="cancelled-tab" data-toggle="pill" href="#cancelled" role="tab" aria-controls="pills-cancelled" aria-selected="false">Cancelled</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="queuer-tab" data-toggle="pill" href="#queuer" role="tab" aria-controls="pills-cancelled" aria-selected="false">As Queuer</a>
+          <a class="nav-link" id="queuer-tab" data-toggle="pill" href="#queuer" role="tab" aria-controls="pills-queuer" aria-selected="false">As Queuer</a>
         </li>
       </ul>
     </div>
@@ -192,8 +191,13 @@
     <div class="container-card-dashboard tab-content col-sm-8" id="pills-tabContent">
 
       <% if @user.is_q? %>
+      <% if @reservations_as_queuer.length == 0 %>
+        <div class="tab-pane fade" id="queuer" role="tabpanel" aria-labelledby="pills-queuer-tab">
+          <p>Nothing to see here !</p>
+        </div>
+        <% else %>
       <% @reservations_as_queuer.each do |reservation| %>
-      <div class="tab-pane" id="queuer" role="tabpanel" aria-labelledby="pills-queuer-tab">
+      <div class="tab-pane fade" id="queuer" role="tabpanel" aria-labelledby="pills-queuer-tab">
         <div class="card-dashboard queuer">
           <div><% if reservation.user.picture.url != nil %><%= image_tag reservation.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
           <div class="text-dashboard col-sm-9">
@@ -212,7 +216,9 @@
             <% elsif reservation.statut == "aborted" || reservation.statut == "declined" %>
               <div><a href="#" class="btn btn-danger">Aborted</a></div>
             <% else %>
-            <div class="btn btn-warning" data-toggle="modal" data-target="#newcommentModal">Comment</div>
+            <%= link_to new_reservation_review_path(reservation, Review.new) do %>
+              <div class="btn btn-warning">Comment</div>
+            <% end %>
             <% end %>
           </div>
         </div>
@@ -223,8 +229,10 @@
 
       <div class="tab-content" id="pills-tabContent">
         <% if @reservations_as_user.where(statut: "process").length == 0 %>
-          <p>Nothing to see here !</p>
-        <% else %>
+          <div class="tab-pane fade" id="process" role="tabpanel" aria-labelledby="pills-process-tab">
+            <p>Nothing to see here !</p>
+          </div>
+          <% else %>
           <% @reservations_as_user.where(statut: "process").each do |reservation| %>
             <div class="tab-pane show active fade" id="accepted" role="tabpanel" aria-labelledby="pills-accepted-tab">
               <div class="card-dashboard user">
@@ -243,6 +251,7 @@
             </div>
           <% end %>
         <% end %>
+      </div>
 
         <% if @reservations_as_user.where(statut: "waiting").length == 0 %>
         <div class="tab-pane fade" id="waiting" role="tabpanel" aria-labelledby="pills-waiting-tab">
@@ -268,6 +277,11 @@
           <% end %>
         <% end %>
 
+        <% if @reservations_as_user.where(statut: "finished").length == 0 %>
+        <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="pills-finished-tab">
+          <p>Nothing to see here !</p>
+        </div>
+        <% else %>
         <% @reservations_as_user.where(statut: "finished").each do |reservation| %>
           <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="pills-finished-tab">
             <div class="card-dashboard user">
@@ -285,7 +299,13 @@
             </div>
           </div>
         <% end %>
+        <% end %>
 
+        <% if @reservations_as_user.where(statut: "aborted").length == 0 %>
+        <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="pills-aborted-tab">
+          <p>Nothing to see here !</p>
+        </div>
+        <% else %>
         <% @reservations_as_user.where(statut: "aborted").each do |reservation| %>
           <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="pills-finished-tab">
             <div class="card-dashboard user">
@@ -301,9 +321,15 @@
                 <div><p class="btn btn-danger">Cancelled</p></div>
               </div>
             </div>
-          </div>
-        <% end %>
-        </div>
-      </div>
-  </div>
+
+                  <% end %>
+               <% end %>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+</div>
+</div>
+<% end %>
 
