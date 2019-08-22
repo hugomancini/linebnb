@@ -2,14 +2,15 @@ class QueuersController < ApplicationController
   def index
     if params[:query].present?
       @queuers = []
-      Queuer.all.each do |queuer|
-        @queuers << queuer unless (queuer.distance_from(params[:query]) > queuer.radius)
+      @queuers_geocoded = []
+      @myqueuers = Queuer.geocoded
+      @myqueuers.each do |queuer|
+        @queuers << queuer unless (queuer.distance_from(params[:query]).to_i > queuer.radius)
+        @queuers_geocoded << queuer unless (queuer.distance_from(params[:query]).to_i > queuer.radius)
       end
-      @queuers_geocoded = @queuers.geocoded
-    end
     else
-      @queuers = Queuer.all
-      @queuers_geocoded = Queuer.geocoded
+    @queuers = Queuer.all
+    @queuers_geocoded = Queuer.geocoded
     end
     @markers = @queuers_geocoded.map do |queuer|
     {
@@ -17,7 +18,7 @@ class QueuersController < ApplicationController
       lng: queuer.longitude,
       infoWindow: render_to_string(partial: "info_window", locals: { queuer: queuer })
     }
-    end
+  end
   end
 
   def show
