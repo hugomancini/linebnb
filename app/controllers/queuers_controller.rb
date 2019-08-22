@@ -1,24 +1,72 @@
 class QueuersController < ApplicationController
   def index
-    if params[:query].present?
+    if params[:query].present? && params[:price].present? && params[:rating].present?
       @queuers = []
       @queuers_geocoded = []
       @myqueuers = Queuer.geocoded
       @myqueuers.each do |queuer|
-        @queuers << queuer unless (queuer.distance_from(params[:query]).to_i > queuer.radius)
-        @queuers_geocoded << queuer unless (queuer.distance_from(params[:query]).to_i > queuer.radius)
+        @queuers << queuer unless (queuer.price_per_hour > params[:price].to_s) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
+        @queuers_geocoded << queuer unless (queuer.price_per_hour > params[:price].to_s) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
+      end
+    elsif params[:query].present? && params[:price].present?
+      @queuers = []
+      @queuers_geocoded = []
+      @myqueuers = Queuer.geocoded
+      @myqueuers.each do |queuer|
+        @queuers << queuer unless (queuer.price_per_hour > params[:price].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius)
+        @queuers_geocoded << queuer unless (queuer.price_per_hour > params[:price].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius)
+      end
+    elsif params[:rating].present? && params[:query].present?
+      @queuers = []
+      @queuers_geocoded = []
+      @myqueuers = Queuer.geocoded
+      @myqueuers.each do |queuer|
+        @queuers << queuer unless (queuer.rating < params[:rating].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius)
+        @queuers_geocoded << queuer unless (queuer.rating < params[:rating].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius)
+      end
+    elsif params[:rating].present? && params[:price].present?
+      @queuers = []
+      @queuers_geocoded = []
+      @myqueuers = Queuer.geocoded
+      @myqueuers.each do |queuer|
+        @queuers << queuer unless (queuer.rating < params[:rating].to_i) || (queuer.price_per_hour > params[:price].to_i)
+        @queuers_geocoded << queuer unless (queuer.rating < params[:rating].to_i) || (queuer.price_per_hour > params[:price].to_i)
+      end
+    elsif params[:query].present?
+      @queuers = []
+      @queuers_geocoded = []
+      @myqueuers = Queuer.geocoded
+      @myqueuers.each do |queuer|
+        @queuers << queuer unless queuer.distance_from(params[:query]).to_i > queuer.radius
+        @queuers_geocoded << queuer unless queuer.distance_from(params[:query]).to_i > queuer.radius
+      end
+    elsif params[:price].present?
+      @queuers = []
+      @queuers_geocoded = []
+      @myqueuers = Queuer.geocoded
+      @myqueuers.each do |queuer|
+        @queuers << queuer unless queuer.price_per_hour > params[:price].to_i
+        @queuers_geocoded << queuer unless queuer.price_per_hour > params[:price].to_i
+      end
+     elsif params[:rating].present?
+      @queuers = []
+      @queuers_geocoded = []
+      @myqueuers = Queuer.geocoded
+      @myqueuers.each do |queuer|
+        @queuers << queuer unless queuer.rating < params[:rating].to_i
+        @queuers_geocoded << queuer unless queuer.rating < params[:rating].to_i
       end
     else
-    @queuers = Queuer.all
-    @queuers_geocoded = Queuer.geocoded
+      @queuers = Queuer.all
+      @queuers_geocoded = Queuer.geocoded
     end
     @markers = @queuers_geocoded.map do |queuer|
-    {
-      lat: queuer.latitude,
-      lng: queuer.longitude,
-      infoWindow: render_to_string(partial: "info_window", locals: { queuer: queuer })
-    }
-  end
+      {
+        lat: queuer.latitude,
+        lng: queuer.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { queuer: queuer })
+      }
+    end
   end
 
   def show
@@ -39,7 +87,6 @@ class QueuersController < ApplicationController
     @user.save
     redirect_to user_path(@user)
   end
-
 
   def edit
     @user = current_user
