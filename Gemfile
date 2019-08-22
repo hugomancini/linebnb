@@ -12,6 +12,9 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'cloudinary', '~> 1.9.1'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'geocoder'
+gem 'pg_search', '~> 2.3.0'
+gem 'activerecord-postgis-adapter'
+gem "algoliasearch-rails"
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
@@ -20,6 +23,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 gem 'carrierwave', '~> 1.2'
+gem 'pundit'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
