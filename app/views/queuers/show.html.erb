@@ -95,10 +95,10 @@
     <h1 style="font-weight:bolder;">Reservation</h1>
     <div>
       <%= simple_form_for [@queuer, Reservation.new] do |f| %>
-        <%= f.input :starts_at %>
-        <%= f.input :ends_at %>
-        <%= f.input :content %>
-        <%= f.input :address %>
+        <%= f.input :starts_at, as: :string, label: "Start queueing from", input_html: {class: "datepicker"} %>
+        <%= f.input :ends_at, as: :string, label: "To", input_html: {class: "datepicker"} %>
+        <%= f.input :address, label: "Address" %>
+        <%= f.input :content, label: "Request additional information" %>
         <%= f.submit class: "btn btn-danger" %>
       <% end %>
     </div>
