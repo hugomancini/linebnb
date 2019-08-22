@@ -203,7 +203,7 @@
           <div class="text-dashboard col-sm-9">
             <div class="top-card-dashboard">
               <div class="name"><h3><%= reservation.user.name %></h3></div>
-              <div class="date"><p><%= reservation.starts_at.day %>/<%= reservation.starts_at.day %>/<%= reservation.starts_at.year %>: <%= reservation.starts_at.hour %>pm - <%= reservation.ends_at.hour %>pm</p></div>
+              <div class="date"><p><%= reservation.starts_at %>-<%= reservation.ends_at %>pm</p></div>
             </div>
             <div class="description-dash"><p><%= reservation.content %></p></div>
           </div>
