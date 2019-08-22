@@ -34,6 +34,7 @@
     transition-duration: 1s;
   }
   h4 {
+    font-size: 35px;
     margin-bottom: 0px;
   }
 }
@@ -95,7 +96,7 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  padding-top: 80px;
+  padding-top: 40px;
   img {
     height: 200px;
     width: 150px;
@@ -118,6 +119,10 @@
       padding: 0px;
     }
   }
+}
+
+.dash-tabs {
+  margin-top: 40px;
 }
 
 .button {
@@ -261,3 +266,4 @@
   position: absolute;
   z-index:100;
 }
+

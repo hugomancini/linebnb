@@ -1,5 +1,8 @@
-<h2><%= queuer.user.name %></h2>
-<p><%= queuer.address %></p>
-<p><%= queuer.price_per_hour %></p>
-<p><%= queuer.rating %></p>
-
+<h3><%= queuer.user.name %></h3>
+<p><% queuer.rating.round.times do %>
+                    <i class="fas fa-star"></i>
+                  <% end %>
+                  <% ((queuer.rating.round - 5) * -1 % 5).times do %>
+                    <i class="far fa-star"></i>
+                  <% end %></p>
+<p><%= queuer.price_per_hour %>€/Hour</p>

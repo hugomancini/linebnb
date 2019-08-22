@@ -14,7 +14,7 @@
             <%= form_tag queuers_path, method: :get do %>
               <%= text_field_tag :query,
                 params[:query],
-                class: "form-control",
+                class: "form-control flat_address",
                 placeholder: "In which city do you need a Queuer ?"
               %>
               <%= submit_tag "Search", class: "btn btn-primary" %>
@@ -73,7 +73,7 @@
       </div>
     </div>
 
-    <div class="row" data-aos="fade-up" data-aos-duration="1000">
+    <div class="row <% if user_signed_in? %> mb-3 <% end %>" data-aos="fade-up" data-aos-duration="1000">
       <h2 class="col-6 offset-3 card-title">Need some extra cash ? Become Queuer !</h2>
       <div class="container-card mx-0">
         <div class="card p-0">
@@ -110,7 +110,7 @@
           </div>
         </div>
       </div>
-      <div class="btn btn-warning col-4 offset-4 my-3" data-toggle="modal" data-target="#signinModal">Become a Queuer</div>
+      <% if user_signed_in? == false %> <div class="btn btn-warning col-4 offset-4 my-3" data-toggle="modal" data-target="#signinModal">Become a Queuer</div> <% end %>
     </div>
   </div>
 </div>
