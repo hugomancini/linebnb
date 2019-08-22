@@ -5,11 +5,8 @@
 </div>
 ​
 <div class="container-bis grid-queuer">
-  <h1 class="title-banner toop", style="padding-top: 30px;">
-    Plenty of queuers happy to wait!
-  </h1>
   <div class="d-flex">
-    <div class="grid">
+    <div class="grid col-sm-6">
       <% @queuers.each do |queuer| %>
         <div class="card-queuer" data-aos="fade-up" data-aos-duration="1000">
           <div class="card-queuer-picture-container">
@@ -37,7 +34,7 @@
         </div>
       <% end %>
     </div>
-    <div id="map" style="width: 35%; height: 100vh; position: sticky; top: 0;" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+    <div id="map" style="width: 100%; height: 100vh; position: sticky; top: 0;" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
     ></div>
   </div>
 </div>
