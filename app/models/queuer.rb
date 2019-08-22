@@ -1,6 +1,6 @@
 class Queuer < ApplicationRecord
   has_many :reservations, dependent: :destroy
-  has_many :reviews, through: :reservations, dependent: :destroy
+  has_many :reviews, through: :reservations
   belongs_to :user
 
   validates :address, presence: true
