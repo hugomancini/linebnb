@@ -4,35 +4,40 @@
   <img src="https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/wp-cms/uploads/2019/08/p-1-90388493-these-5-great-alternative-search-engines-do-what-google-cant.jpg" alt="">
 </div>
 ​
-<div class="container grid-queuer">
+<div class="container-bis grid-queuer">
   <h1 class="title-banner toop", style="padding-top: 30px;">
     Plenty of queuers happy to wait!
   </h1>
-  <div class="grid">
-  <% @queuers.each do |queuer| %>
-  <div class="card-queuer" data-aos="fade-up" data-aos-duration="1000">
-    <div class="card-queuer-picture-container">
-      <% if queuer.user.picture.url != nil %>
-        <%= image_tag queuer.user.picture.url, class: "image" %>
-      <% else %>
-        <img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt="" class="image">
+  <div class="d-flex">
+    <div class="grid">
+      <% @queuers.each do |queuer| %>
+        <div class="card-queuer" data-aos="fade-up" data-aos-duration="1000">
+          <div class="card-queuer-picture-container">
+            <% if queuer.user.picture.url != nil %>
+              <%= image_tag queuer.user.picture.url, class: "image" %>
+            <% else %>
+              <img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt="" class="image">
+            <% end %>
+            <div class="default-display" >
+              <%= link_to queuer_path(queuer) do %>
+                <img src="https://cdn.shopify.com/s/files/1/2828/2118/files/eyeball-01-01_300x300.png?v=1517086367" class="fas fa-eye first-icon">
+              <% end %>
+              <%= link_to new_queuer_reservation_path(queuer) do  %>
+                <i class="fas fa-forward second-icon"></i>
+              <% end %>
+            </div>
+          </div>
+          <div class="card-queuer-infos">
+            <div>
+              <h2><%= link_to queuer.user.name, queuer_path(queuer) %></h2>
+              <p><b>Area:</b> <%= queuer.address %></p>
+            </div>
+            <h2 class="card-queuer-pricing">€<%= queuer.price_per_hour %></%>/hour</h2>
+          </div>
+        </div>
       <% end %>
-      <div class="default-display" >
-        <%= link_to queuer_path(queuer) do %>
-          <img src="https://cdn.shopify.com/s/files/1/2828/2118/files/eyeball-01-01_300x300.png?v=1517086367" class="fas fa-eye first-icon">
-        <% end %> <%= link_to new_queuer_reservation_path(queuer) do  %>
-        <i class="fas fa-forward second-icon"></i>
-          <% end %>
-      </div>
     </div>
-    <div class="card-queuer-infos">
-      <div>
-        <h2><%= link_to queuer.user.name, queuer_path(queuer) %></h2>
-        <p><b>Area:</b> <%= queuer.address %></p>
-      </div>
-      <h2 class="card-queuer-pricing">€<%= queuer.price_per_hour %></%>/hour</h2>
-    </div>
+    <div id="map" style="width: 35%; height: 100vh; position: sticky; top: 0;" data-markers="<%= @markers.to_json %>" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+    ></div>
   </div>
-  <% end %>
-</div>
 </div>
