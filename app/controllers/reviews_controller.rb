@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
     @review.reservation = @reservation
     @review.user = @user
     if @review.save
-      redirect_ to queuer_path(@queuer)
+      redirect_to queuer_path(@queuer)
     else
       render :new
     end
@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
   end
 
   def set_reservation
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find(params[:reservation_id])
   end
 
   def set_queuer
