@@ -1,0 +1,30 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <%= link_to root_path, class: "navbar-brand" do %>
+    <%= image_tag "https://medias.pylones.com/9633-thickbox_default/horloge-happy-time.jpg", class: "avatar" %>
+  <% end %>
+
+
+  <div class="navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav" style="flex-direction: row;">
+      <% if user_signed_in? %>
+        <div>
+          <%= link_to user_path(current_user) do %>
+          <li class="nav-item active">Profil</li>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+          <li class="nav-item active">Logout</li>
+          <% end %>
+        </div>
+      <% else %>
+        <div>
+          <li class="nav-item active signin" data-toggle="modal" data-target="#signinModal">Sign in</li>
+        </div>
+        <div>
+          <li class="nav-item active login" data-toggle="modal" data-target="#loginModal">Login</li>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+</div>
