@@ -13,6 +13,7 @@ gem 'cloudinary', '~> 1.9.1'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'geocoder'
 gem 'pg_search', '~> 2.3.0'
+gem 'activerecord-postgis-adapter'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
