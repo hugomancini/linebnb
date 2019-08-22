@@ -126,7 +126,17 @@
               <div><% if review.user.picture.url != nil %><%= image_tag review.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
               <div><%= review.user.name %></p></div>
             </div>
-            <div><p><% review.user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((review.user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
+            <div><p><% if review.user.rating != nil %>
+                  <% review.user.rating.round.times do %>
+                  <i class="fas fa-star"></i>
+                  <% end %>
+                  <% ((review.user.rating.round - 5) * -1 % 5).times do %>
+                  <i class="far fa-star"></i>
+                  <% end %></p>
+                  <% else %>
+                  <p>No rating yet</p>
+                  <% end %></p>
+            </div>
           </div>
           <div class="comment-content">
             <p><%= review.content %></p>
@@ -147,7 +157,17 @@
               <div><% if review.user.picture.url != nil %><%= image_tag review.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
               <div><%= review.user.name %></p></div>
             </div>
-            <div><p><% review.user.rating.round.times do %> <i class="fas fa-star"></i> <% end %> <% ((review.user.rating.round - 5) * -1 % 5).times do %> <i class="far fa-star"></i> <% end %></p></div>
+            <div><p><% if review.user.rating != nil %>
+                  <% review.user.rating.round.times do %>
+                  <i class="fas fa-star"></i>
+                  <% end %>
+                  <% ((review.user.rating.round - 5) * -1 % 5).times do %>
+                  <i class="far fa-star"></i>
+                  <% end %></p>
+                  <% else %>
+                  <p>No rating yet</p>
+                  <% end %></p>
+            </div>
           </div>
           <div class="comment-content">
             <p><%= review.content %></p>
@@ -163,169 +183,165 @@
     <% end %>
   </div>
   <div class="row col-sm-8 offset-1">
-  <div class="col-sm-12 margintopmega big-dash-container" data-aos="fade-left" data-aos-duration="1000">
-    <h2>Dashboard</h2>
-    <div class="dash-tabs">
-      <ul class="nav nav-pills mb-1" id="reservations-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="accepted-tab" data-toggle="pill" href="#accepted" role="tab" aria-controls="pills-home" aria-selected="true">Accepted</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="waiting-tab" data-toggle="pill" href="#waiting" role="tab" aria-controls="pills-waiting" aria-selected="false">Waiting</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="finished-tab" data-toggle="pill" href="#finished" role="tab" aria-controls="pills-finished" aria-selected="false">Finished</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="cancelled-tab" data-toggle="pill" href="#cancelled" role="tab" aria-controls="pills-cancelled" aria-selected="false">Cancelled</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="queuer-tab" data-toggle="pill" href="#queuer" role="tab" aria-controls="pills-queuer" aria-selected="false">As Queuer</a>
-        </li>
-      </ul>
-    </div>
-    <div class="container-card-dashboard tab-content col-sm-8" id="pills-tabContent">
-
-      <% if @user.is_q? %>
-      <% if @reservations_as_queuer.length == 0 %>
-        <div class="tab-pane fade" id="queuer" role="tabpanel" aria-labelledby="pills-queuer-tab">
-          <p>Nothing to see here !</p>
-        </div>
-        <% else %>
-      <% @reservations_as_queuer.each do |reservation| %>
-      <div class="tab-pane fade" id="queuer" role="tabpanel" aria-labelledby="pills-queuer-tab">
-        <div class="card-dashboard queuer">
-          <div><% if reservation.user.picture.url != nil %><%= image_tag reservation.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
-          <div class="text-dashboard col-sm-9">
-            <div class="top-card-dashboard">
-              <div class="name"><h3><%= reservation.user.name %></h3></div>
-              <div class="date"><p><%= reservation.starts_at %>-<%= reservation.ends_at %>pm</p></div>
-            </div>
-            <div class="description-dash"><p><%= reservation.content %></p></div>
-          </div>
-          <div class="button">
-            <% if reservation.statut == "waiting" %>
-              <div><%= link_to "Accept", statut_path(reservation), class: "btn btn-primary" %></div>
-              <div><%= link_to "Decline", decline_path(reservation), class: "btn btn-warning" %></div>
-            <% elsif @user.is_q? == true && reservation.statut == "process" %>
-              <div><%= link_to "Confirm", statut_path(reservation), class: "btn btn-primary" %></div>
-            <% elsif reservation.statut == "aborted" || reservation.statut == "declined" %>
-              <div><a href="#" class="btn btn-danger">Aborted</a></div>
-            <% else %>
-            <%= link_to new_reservation_review_path(reservation, Review.new) do %>
-              <div class="btn btn-warning">Comment</div>
-            <% end %>
-            <% end %>
-          </div>
-        </div>
+    <div class="col-sm-12 margintopmega big-dash-container" data-aos="fade-left" data-aos-duration="1000">
+      <h2>Dashboard</h2>
+      <div class="dash-tabs">
+        <ul class="nav nav-pills mb-1" id="reservations-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="accepted-tab" data-toggle="pill" href="#accepted" role="tab" aria-controls="pills-home" aria-selected="true">Accepted</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="waiting-tab" data-toggle="pill" href="#waiting" role="tab" aria-controls="pills-waiting" aria-selected="false">Waiting</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="finished-tab" data-toggle="pill" href="#finished" role="tab" aria-controls="pills-finished" aria-selected="false">Finished</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="cancelled-tab" data-toggle="pill" href="#cancelled" role="tab" aria-controls="pills-cancelled" aria-selected="false">Cancelled</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="queuer-tab" data-toggle="pill" href="#queuer" role="tab" aria-controls="pills-queuer" aria-selected="false">As Queuer</a>
+          </li>
+        </ul>
       </div>
-      <% end %>
-      <% end %>
+      <div class="container-card-dashboard tab-content col-sm-8" id="pills-tabContent">
+        <div class="tab-content" id="pills-tabContent">
+        <% if @user.is_q? %>
+          <% if @reservations_as_queuer.length == 0 %>
+            <div class="tab-pane fade" id="queuer" role="tabpanel" aria-labelledby="pills-queuer-tab">
+              <p>Nothing to see here !</p>
+            </div>
+          <% else %>
+          <% @reservations_as_queuer.each do |reservation| %>
+          <div class="tab-pane fade" id="queuer" role="tabpanel" aria-labelledby="pills-queuer-tab">
+            <div class="card-dashboard queuer">
+              <div><% if reservation.user.picture.url != nil %><%= image_tag reservation.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
+              <div class="text-dashboard col-sm-9">
+                <div class="top-card-dashboard">
+                  <div class="name"><h3><%= reservation.user.name %></h3></div>
+                  <div class="date"><p><%= reservation.starts_at %>-<%= reservation.ends_at %>pm</p></div>
+                </div>
+                <div class="description-dash"><p><%= reservation.content %></p></div>
+              </div>
+              <div class="button">
+                <% if reservation.statut == "waiting" %>
+                  <div><%= link_to "Accept", statut_path(reservation), class: "btn btn-primary" %></div>
+                  <div><%= link_to "Decline", decline_path(reservation), class: "btn btn-warning" %></div>
+                <% elsif @user.is_q? == true && reservation.statut == "process" %>
+                  <div><%= link_to "Confirm", statut_path(reservation), class: "btn btn-primary" %></div>
+                <% elsif reservation.statut == "aborted" || reservation.statut == "declined" %>
+                  <div><a href="#" class="btn btn-danger">Aborted</a></div>
+                <% else %>
+                <%= link_to new_reservation_review_path(reservation, Review.new) do %>
+                  <div class="btn btn-warning">Comment</div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+          <% end %>
+        <% end %>
+          <% if @reservations_as_user.where(statut: "process").length == 0 %>
+            <div class="tab-pane fade show active" id="accepted" role="tabpanel" aria-labelledby="pills-process-tab">
+              <p>Nothing to see here !</p>
+            </div>
+          <% else %>
+            <% @reservations_as_user.where(statut: "process").each do |reservation| %>
+              <div class="tab-pane show active fade" id="accepted" role="tabpanel" aria-labelledby="pills-accepted-tab">
+                <div class="card-dashboard user">
+                  <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
+                  <div class="text-dashboard col-sm-9">
+                    <div class="top-card-dashboard">
+                      <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
+                      <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+                    </div>
+                    <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                  </div>
+                  <div class="button">
+                      <div><a href="#" class="btn btn-primary">Accepted</a></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
 
-
-      <div class="tab-content" id="pills-tabContent">
-        <% if @reservations_as_user.where(statut: "process").length == 0 %>
-          <div class="tab-pane fade" id="process" role="tabpanel" aria-labelledby="pills-process-tab">
+          <% if @reservations_as_user.where(statut: "waiting").length == 0 %>
+          <div class="tab-pane fade" id="waiting" role="tabpanel" aria-labelledby="pills-waiting-tab">
             <p>Nothing to see here !</p>
           </div>
           <% else %>
-          <% @reservations_as_user.where(statut: "process").each do |reservation| %>
-            <div class="tab-pane show active fade" id="accepted" role="tabpanel" aria-labelledby="pills-accepted-tab">
-              <div class="card-dashboard user">
-                <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
-                <div class="text-dashboard col-sm-9">
-                  <div class="top-card-dashboard">
-                    <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
-                    <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+            <% @reservations_as_user.where(statut: "waiting").each do |reservation| %>
+              <div class="tab-pane fade" id="waiting" role="tabpanel" aria-labelledby="pills-waiting-tab">
+                <div class="card-dashboard user">
+                  <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
+                  <div class="text-dashboard col-sm-9">
+                    <div class="top-card-dashboard">
+                      <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
+                      <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+                    </div>
+                    <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
                   </div>
-                  <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
-                </div>
-                <div class="button">
-                    <div><a href="#" class="btn btn-primary">Accepted</a></div>
+                  <div class="button">
+                      <div><%= link_to "Cancel", decline_path(reservation), class: "btn btn-warning" %></div>
+                  </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
 
-        <% if @reservations_as_user.where(statut: "waiting").length == 0 %>
-        <div class="tab-pane fade" id="waiting" role="tabpanel" aria-labelledby="pills-waiting-tab">
-          <p>Nothing to see here !</p>
-        </div>
-        <% else %>
-          <% @reservations_as_user.where(statut: "waiting").each do |reservation| %>
-            <div class="tab-pane fade" id="waiting" role="tabpanel" aria-labelledby="pills-waiting-tab">
-              <div class="card-dashboard user">
-                <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
-                <div class="text-dashboard col-sm-9">
-                  <div class="top-card-dashboard">
-                    <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
-                    <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
-                  </div>
-                  <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
-                </div>
-                <div class="button">
-                    <div><%= link_to "Cancel", decline_path(reservation), class: "btn btn-warning" %></div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-
-        <% if @reservations_as_user.where(statut: "finished").length == 0 %>
-        <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="pills-finished-tab">
-          <p>Nothing to see here !</p>
-        </div>
-        <% else %>
-        <% @reservations_as_user.where(statut: "finished").each do |reservation| %>
+          <% if @reservations_as_user.where(statut: "finished").length == 0 %>
           <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="pills-finished-tab">
-            <div class="card-dashboard user">
-              <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
-              <div class="text-dashboard col-sm-9">
-                <div class="top-card-dashboard">
-                  <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
-                  <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
-                </div>
-                <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
-              </div>
-              <div class="button">
-                <div class="btn btn-warning" data-toggle="modal" data-target="#newcommentModal">Comment</div>
-              </div>
-            </div>
+            <p>Nothing to see here !</p>
           </div>
-        <% end %>
-        <% end %>
-
-        <% if @reservations_as_user.where(statut: "aborted").length == 0 %>
-        <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="pills-aborted-tab">
-          <p>Nothing to see here !</p>
-        </div>
-        <% else %>
-        <% @reservations_as_user.where(statut: "aborted").each do |reservation| %>
-          <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="pills-finished-tab">
-            <div class="card-dashboard user">
-              <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
-              <div class="text-dashboard col-sm-9">
-                <div class="top-card-dashboard">
-                  <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
-                  <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+          <% else %>
+          <% @reservations_as_user.where(statut: "finished").each do |reservation| %>
+            <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="pills-finished-tab">
+              <div class="card-dashboard user">
+                <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
+                <div class="text-dashboard col-sm-9">
+                  <div class="top-card-dashboard">
+                    <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
+                    <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+                  </div>
+                  <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
                 </div>
-                <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
-              </div>
-              <div class="button">
-                <div><p class="btn btn-danger">Cancelled</p></div>
+                <div class="button">
+                  <div class="btn btn-warning" data-toggle="modal" data-target="#newcommentModal">Comment</div>
+                </div>
               </div>
             </div>
-                <% end %>
-               <% end %>
-               <% end %>
-               <% end %>
+          <% end %>
+          <% end %>
+
+          <% if @reservations_as_user.where(statut: "aborted").length == 0 %>
+          <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="pills-aborted-tab">
+            <p>Nothing to see here !</p>
+          </div>
+          <% else %>
+          <% @reservations_as_user.where(statut: "aborted").each do |reservation| %>
+            <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="pills-finished-tab">
+              <div class="card-dashboard user">
+                <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
+                <div class="text-dashboard col-sm-9">
+                  <div class="top-card-dashboard">
+                    <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
+                    <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+                  </div>
+                  <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                </div>
+                <div class="button">
+                  <div><p class="btn btn-danger">Cancelled</p></div>
+                </div>
+              </div>
+                 <% end %>
+                 <% end %>
+                 <% end %>
+               </div>
              </div>
            </div>
          </div>
        </div>
      </div>
-</div>
+  </div>
 </div>
 
