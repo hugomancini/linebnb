@@ -1,17 +1,22 @@
 class QueuersController < ApplicationController
   def index
-    @queuers_geocoded = Queuer.geocoded
-    @markers = @queuers_geocoded.map do |queuer|
-      {
-        lat: queuer.latitude,
-        lng: queuer.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { queuer: queuer })
-      }
-    end
     if params[:query].present?
-      @queuers = Queuer.search_by_address(params[:query])
+      @queuers = []
+      Queuer.all.each do |queuer|
+        @queuers << queuer unless (queuer.distance_from(params[:query]) > queuer.radius)
+      end
+      @queuers_geocoded = @queuers.geocoded
+    end
     else
       @queuers = Queuer.all
+      @queuers_geocoded = Queuer.geocoded
+    end
+    @markers = @queuers_geocoded.map do |queuer|
+    {
+      lat: queuer.latitude,
+      lng: queuer.longitude,
+      infoWindow: render_to_string(partial: "info_window", locals: { queuer: queuer })
+    }
     end
   end
 
