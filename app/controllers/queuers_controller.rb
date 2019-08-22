@@ -1,6 +1,5 @@
 class QueuersController < ApplicationController
   def index
-    @queuers = Queuer.all
     @queuers_geocoded = Queuer.geocoded
     @markers = @queuers_geocoded.map do |queuer|
       {
@@ -8,6 +7,11 @@ class QueuersController < ApplicationController
         lng: queuer.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { queuer: queuer })
       }
+    end
+    if params[:query].present?
+      @queuers = Queuer.search_by_address(params[:query])
+    else
+      @queuers = Queuer.all
     end
   end
 

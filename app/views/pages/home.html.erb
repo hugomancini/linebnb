@@ -10,10 +10,16 @@
           <h1 class="title-banner toop">Buy yourself some free time <br> Pay people to queue for you</h1>
         </div>
         <div>
-          <form action="#" class="banner-form">
-            <input type="text" placeholder="Search a queuer (input targeted address)" name="zone">
-            <h4 class="btn btn-primary">Submit</h4>
-          </form>
+          <div class="banner-form">
+            <%= form_tag queuers_path, method: :get do %>
+              <%= text_field_tag :query,
+                params[:query],
+                class: "form-control",
+                placeholder: "In which city do you need a Queuer ?"
+              %>
+              <%= submit_tag "Search", class: "btn btn-primary" %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
