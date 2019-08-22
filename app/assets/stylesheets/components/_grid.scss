@@ -10,6 +10,7 @@
   grid-gap: 16px;
   flex-grow: 1;
   padding: 16px;
+  padding-top: 0px;
 }
 
 .card-queuer {
@@ -20,9 +21,9 @@
 }
 
 .card-queuer-picture-container {
+  border-radius: 10px;
   height: 200px;
   width: 100%;
-  padding: 20px 0px;
   position: relative;
 }
 
@@ -84,11 +85,13 @@
 }
 
 .card-queuer-picture-container:hover {
+  border-radius: 10px;
   .image {
     filter: brightness(50%);
     transition-duration: 1s;
   }
   .default-display {
     display: block;
+    border-radius: 10px;
   }
 }
