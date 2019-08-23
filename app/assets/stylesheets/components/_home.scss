@@ -141,6 +141,18 @@
   }
 }
 
+#arrow-down {
+  font-size: 5em;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  text-decoration:none;
+
+  a {
+    color:white;
+  }
+}
+
 .stick-footer {
   min-height: calc(100vh - 100px);
 }
