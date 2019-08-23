@@ -12,6 +12,9 @@
     height: 46px;
     margin-right: 20px;
   }
+  .algolia-places {
+    width: 400px;
+  }
 }
 
 .new-res-form {
@@ -59,7 +62,7 @@
 .banner-image {
   position: relative;
   box-shadow: 0 0 30px rgba(0,0,0,0.7);
-  height: 95vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
