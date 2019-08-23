@@ -19,7 +19,7 @@
         <div class="tab-content" id="tabs-tabContent">
           <% if @reservations_as_queuer.where(statut: "process").length == 0 %>
             <div class="tab-pane fade show active" id="accepted" role="tabpanel" aria-labelledby="tabs-process-tab">
-              <p>Nothing to see here !</p>
+              <p class="nuthing">Nothing to see here !</p>
             </div>
           <% else %>
             <% @reservations_as_queuer.where(statut: "process").each do |reservation| %>
@@ -43,7 +43,7 @@
 
           <% if @reservations_as_queuer.where(statut: "waiting").length == 0 %>
           <div class="tab-pane fade" id="waiting" role="tabpanel" aria-labelledby="tabs-waiting-tab">
-            <p>Nothing to see here !</p>
+            <p class="nuthing">Nothing to see here !</p>
           </div>
           <% else %>
             <% @reservations_as_queuer.where(statut: "waiting").each do |reservation| %>
@@ -67,7 +67,7 @@
 
           <% if @reservations_as_queuer.where(statut: "finished").length == 0 %>
           <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="tabs-finished-tab">
-            <p>Nothing to see here !</p>
+            <p class="nuthing">Nothing to see here !</p>
           </div>
           <% else %>
           <% @reservations_as_queuer.where(statut: "finished").each do |reservation| %>
@@ -91,7 +91,7 @@
 
           <% if @reservations_as_queuer.where(statut: "aborted").length == 0 %>
             <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="tabs-aborted-tab">
-              <p>Nothing to see here !</p>
+              <p class="nuthing">Nothing to see here !</p>
             </div>
           <% else %>
             <% @reservations_as_queuer.where(statut: "aborted").each do |reservation| %>
