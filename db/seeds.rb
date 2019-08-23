@@ -207,8 +207,8 @@ j = 0
 
   # Seeding reservations with status "Waiting"
   waiting_reservation = Reservation.new(
-    starts_at:      DateTime.new(2019, 8, 19, 18, 00, 0),
-    ends_at:        DateTime.new(2019, 8, 19, 20, 00, 0),
+    starts_at:      "2019-08-23 19:00",
+    ends_at:        "2019-08-23 20:00",
     content:        WAITING_ADDRESS_NAME[j],
     address:        WAITING_ADDRESS_SITE[j],
     statut:         "waiting"
@@ -219,8 +219,8 @@ j = 0
 
   # Seeding reservations with status "Process"
   process_reservation = Reservation.new(
-    starts_at:      DateTime.new(2019, 8, 19, 18, 00, 0),
-    ends_at:        DateTime.new(2019, 8, 19, 20, 00, 0),
+    starts_at:      "2019-08-23 19:00",
+    ends_at:        "2019-08-23 20:00",
     content:        PROCESS_ADDRESS_NAME[j],
     address:        PROCESS_ADDRESS_SITE[j],
     statut:         "process"
@@ -231,8 +231,8 @@ j = 0
 
   # Seeding reservations with status "Process"
   finished_reservation = Reservation.new(
-    starts_at:      DateTime.new(2019, 8, 19, 18, 00, 0),
-    ends_at:        DateTime.new(2019, 8, 19, 20, 00, 0),
+    starts_at:      "2019-08-23 19:00",
+    ends_at:        "2019-08-23 20:00",
     content:        FINISHED_ADDRESS_NAME[j],
     address:        FINISHED_ADDRESS_SITE[j],
     statut:         "finished"
