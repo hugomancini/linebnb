@@ -91,7 +91,21 @@ class QueuersController < ApplicationController
   end
 
   def show
+    @geocoded_queuers = Queuer.geocoded
+    @geocoded_queuers_filtered = []
     @queuer = Queuer.find(params[:id])
+    @geocoded_queuers.each do |element|
+      if element.id == @queuer.id
+        @geocoded_queuers_filtered << element
+      end
+    end
+    @markers = @geocoded_queuers_filtered.map do |geocoded|
+        {
+          lat: geocoded.latitude,
+          lng: geocoded.longitude,
+          infoWindow: render_to_string(partial: "info_window_for_show", locals: { geocoded: geocoded })
+        }
+    end
   end
 
   def new

@@ -1,0 +1,13 @@
+<h3><%= geocoded.user.name %></h3>
+<p><% if geocoded.rating != nil %>
+    <% geocoded.rating.round.times do %>
+    <i class="fas fa-star"></i>
+    <% end %>
+    <% ((geocoded.rating.round - 5) * -1 % 5).times do %>
+    <i class="far fa-star"></i>
+    <% end %></p>
+    <% else %>
+    <p>No rating yet</p>
+    <% end %>
+<p><%= geocoded.price_per_hour %>€/Hour</p>
+
