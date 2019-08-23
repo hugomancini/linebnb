@@ -2,6 +2,16 @@
 
 .banner {
   position: relative;
+  .form {
+    display: flex;
+    justify-content: flex-start;
+    .btn {
+      margin-top: 0px;    }
+  }
+  .ap-input {
+    height: 46px;
+    margin-right: 20px;
+  }
 }
 
 .new-res-form {
@@ -199,4 +209,3 @@
 .ap-input-icon {
   visibility: hidden;
 }
-
