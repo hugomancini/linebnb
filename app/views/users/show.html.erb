@@ -123,16 +123,20 @@
               <div><% if review.user.picture.url != nil %><%= image_tag review.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
               <div><%= review.user.name %></p></div>
             </div>
-            <div><p><% if review.user.rating != nil %>
-                  <% review.user.rating.round.times do %>
-                  <i class="fas fa-star"></i>
-                  <% end %>
-                  <% ((review.user.rating.round - 5) * -1 % 5).times do %>
-                  <i class="far fa-star"></i>
-                  <% end %></p>
+            <div>                <p>
+                  <% if review.rating != nil %>
+                    <% review.rating.round.times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <% (5 - review.rating.round).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
                   <% else %>
-                  <p>No rating yet</p>
-                  <% end %></p>
+                    <% 5.times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  <% end %>
+                </p>
             </div>
           </div>
           <div class="comment-content">
@@ -153,16 +157,20 @@
               <div><% if review.user.picture.url != nil %><%= image_tag review.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
               <div><%= review.user.name %></p></div>
             </div>
-            <div><p><% if review.user.rating != nil %>
-                  <% review.user.rating.round.times do %>
-                  <i class="fas fa-star"></i>
-                  <% end %>
-                  <% ((review.user.rating.round - 5) * -1 % 5).times do %>
-                  <i class="far fa-star"></i>
-                  <% end %></p>
+            <div>                <p>
+                  <% if review.rating != nil %>
+                    <% review.rating.round.times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <% (5 - review.rating.round).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
                   <% else %>
-                  <p>No rating yet</p>
-                  <% end %></p>
+                    <% 5.times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  <% end %>
+                </p>
             </div>
           </div>
           <div class="comment-content">
