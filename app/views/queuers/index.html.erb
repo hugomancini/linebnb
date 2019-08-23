@@ -1,28 +1,40 @@
 <%= render './pages/signinmodal' %>
-<div class="placebo-search">
-  <img src="https://images.fastcompany.net/image/upload/w_1280,f_auto,q_auto,fl_lossy/wp-cms/uploads/2019/08/p-1-90388493-these-5-great-alternative-search-engines-do-what-google-cant.jpg" alt="">
+<div class="container">
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="search-banner">
+      <h1 class="text-center">Find the perfect fit amongst our <b><%= @queuers.size * 13 %></b> queuers ! </h1>
+        <div class="search-form text-center">
+            <%= form_tag queuers_path, method: :get, :class => "form-inline" do %>
+              <div class="form-items m-1">
+                <%= text_field_tag :query,
+                  params[:query],
+                  class: "form-control",
+                  placeholder: "In which city do you need a Queuer ?"
+                %>
+              </div>
+              <div class="form-items m-1">
+                <%= text_field_tag :price,
+                  params[:price],
+                  class: "form-control",
+                  placeholder: "Filter by price"
+                %>
+              </div>
+              <div class="form-items m-1">
+                <%= text_field_tag :rating,
+                  params[:rating],
+                  class: "form-control",
+                  placeholder: "Filter by rating"
+                %>
+              </div>
+              <%= submit_tag "Filter", class: "btn btn-primary filter-button" %>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
 
- <div class="banner-form">
-            <%= form_tag queuers_path, method: :get do %>
-              <%= text_field_tag :query,
-                params[:query],
-                class: "form-control",
-                placeholder: "In which city do you need a Queuer ?"
-              %>
-              <%= text_field_tag :price,
-                params[:price],
-                class: "form-control",
-                placeholder: "Filter by price"
-              %>
-              <%= text_field_tag :rating,
-                params[:rating],
-                class: "form-control",
-                placeholder: "Filter by rating"
-              %>
-              <%= submit_tag "Filter", class: "btn btn-primary" %>
-            <% end %>
-</div>
 ​
 <div class="container-bis grid-queuer">
   <div class="d-flex">

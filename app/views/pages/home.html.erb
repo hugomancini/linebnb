@@ -15,18 +15,21 @@
               <%= text_field_tag :query,
                 params[:query],
                 class: "form-control flat_address",
-                placeholder: "In which city do you need a Queuer ?"
+                placeholder: "Where do you need a Queuer ?"
               %>
               <%= submit_tag "Search", class: "btn btn-primary" %>
             <% end %>
           </div>
         </div>
       </div>
+        <span id="arrow-down" style="">
+          <a href="#value-proposition"><i  class="fas fa-chevron-down"></i></a>
+        </span>
     </div>
   </div>
 
   <div class="container">
-    <div class="container-card mx-0">
+    <div class="container-card mx-0" id="value-proposition">
       <div class="card p-0" data-aos="fade-up" data-aos-duration="1000">
         <div>
           <img src="https://www.shareicon.net/data/128x128/2017/07/13/888373_idea_512x512.png" alt="">
