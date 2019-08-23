@@ -1,114 +1,143 @@
       <div class="dash-tabs">
         <ul class="nav nav-tabs mb-1" id="reservations-tab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="accepted-tab" data-toggle="tab" href="#accepted" role="tab" aria-controls="tabs-home" aria-selected="true">Accepted</a>
+            <a class="nav-link active" id="accepted-tab" data-toggle="tab" href="#acceptedu" role="tab" aria-controls="tabs-home" aria-selected="true">Accepted</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="waiting-tab" data-toggle="tab" href="#waiting" role="tab" aria-controls="tabs-waiting" aria-selected="false">Waiting</a>
+            <a class="nav-link" id="waiting-tab" data-toggle="tab" href="#waitingu" role="tab" aria-controls="tabs-waiting" aria-selected="false">Waiting</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="finished-tab" data-toggle="tab" href="#finished" role="tab" aria-controls="tabs-finished" aria-selected="false">Finished</a>
+            <a class="nav-link" id="finished-tab" data-toggle="tab" href="#finishedu" role="tab" aria-controls="tabs-finished" aria-selected="false">Finished</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelled" role="tab" aria-controls="tabs-cancelled" aria-selected="false">Cancelled</a>
+            <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelledu" role="tab" aria-controls="tabs-cancelled" aria-selected="false">Cancelled</a>
           </li>
         </ul>
       </div>
       <div class="container-card-dashboard tab-content col-sm-8" id="tabs-tabContent">
         <div class="tab-content" id="tabs-tabContent">
           <% if @reservations_as_user.where(statut: "process").length == 0 %>
-            <div class="tab-pane fade show active" id="accepted" role="tabpanel" aria-labelledby="tabs-process-tab">
+            <div class="tab-pane fade show active" id="acceptedu" role="tabpanel" aria-labelledby="tabs-process-tab">
               <p>Nothing to see here !</p>
             </div>
           <% else %>
+              <div class="tab-pane show active fade" id="acceptedu" role="tabpanel" aria-labelledby="tabs-accepted-tab">
             <% @reservations_as_user.where(statut: "process").each do |reservation| %>
-              <div class="tab-pane show active fade" id="accepted" role="tabpanel" aria-labelledby="tabs-accepted-tab">
                 <div class="card-dashboard user">
                   <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
                   <div class="text-dashboard col-sm-9">
                     <div class="top-card-dashboard">
                       <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
-                      <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+                      <div class="date">
+                        <p>
+                          <%= reservation.starts_at %> - <%= reservation.ends_at %>
+                        </p>
+                        <p>
+                          Total: €<%= (DateTime.parse(reservation.ends_at).to_i - DateTime.parse(reservation.starts_at).to_i).fdiv(3600)*reservation.queuer.price_per_hour %>
+                        </p>
+                      </div>
                     </div>
-                    <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                    <div class="description-dash"><p><%= reservation.content %></p></div>
                   </div>
                   <div class="button">
-                      <div><a href="#" class="btn btn-primary">Accepted</a></div>
+                      <div><a href="#" class="btn btn-primary">In process</a></div>
                   </div>
                 </div>
-              </div>
             <% end %>
+              </div>
           <% end %>
 
           <% if @reservations_as_user.where(statut: "waiting").length == 0 %>
-          <div class="tab-pane fade" id="waiting" role="tabpanel" aria-labelledby="tabs-waiting-tab">
+          <div class="tab-pane fade" id="waitingu" role="tabpanel" aria-labelledby="tabs-waiting-tab">
             <p>Nothing to see here !</p>
           </div>
           <% else %>
+              <div class="tab-pane fade" id="waitingu" role="tabpanel" aria-labelledby="tabs-waiting-tab">
             <% @reservations_as_user.where(statut: "waiting").each do |reservation| %>
-              <div class="tab-pane fade" id="waiting" role="tabpanel" aria-labelledby="tabs-waiting-tab">
                 <div class="card-dashboard user">
                   <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
                   <div class="text-dashboard col-sm-9">
                     <div class="top-card-dashboard">
                       <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
-                      <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+                      <div class="date">
+                        <p>
+                          <%= reservation.starts_at %> - <%= reservation.ends_at %>
+                        </p>
+                        <p>
+                          Total: €<%= (DateTime.parse(reservation.ends_at).to_i - DateTime.parse(reservation.starts_at).to_i).fdiv(3600)*reservation.queuer.price_per_hour %>
+                        </p>
+                      </div>
                     </div>
-                    <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                    <div class="description-dash"><p><%= reservation.content %></p></div>
                   </div>
                   <div class="button">
-                      <div><%= link_to "Cancel", decline_path(reservation), class: "btn btn-warning" %></div>
+                      <%= link_to "Cancel", decline_path(reservation), class: "btn btn-warning" %>
                   </div>
                 </div>
-              </div>
             <% end %>
+              </div>
           <% end %>
 
           <% if @reservations_as_user.where(statut: "finished").length == 0 %>
-          <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="tabs-finished-tab">
+          <div class="tab-pane fade" id="finishedu" role="tabpanel" aria-labelledby="tabs-finished-tab">
             <p>Nothing to see here !</p>
           </div>
           <% else %>
+            <div class="tab-pane fade" id="finishedu" role="tabpanel" aria-labelledby="tabs-finished-tab">
           <% @reservations_as_user.where(statut: "finished").each do |reservation| %>
-            <div class="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="tabs-finished-tab">
               <div class="card-dashboard user">
                 <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
                 <div class="text-dashboard col-sm-9">
                   <div class="top-card-dashboard">
                     <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
-                    <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+                    <div class="date">
+                      <p>
+                          <%= reservation.starts_at %> - <%= reservation.ends_at %>
+                        </p>
+                        <p>
+                          Total: €<%= (DateTime.parse(reservation.ends_at).to_i - DateTime.parse(reservation.starts_at).to_i).fdiv(3600)*reservation.queuer.price_per_hour %>
+                        </p>
+                    </div>
                   </div>
-                  <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                  <div class="description-dash"><p><%= reservation.content %></p></div>
                 </div>
                 <div class="button">
-                  <div class="btn btn-warning" data-toggle="modal" data-target="#newcommentModal">Comment</div>
+                  <%= link_to "Comment", new_reservation_review_path(reservation), class: "btn btn-primary" %>
                 </div>
               </div>
-            </div>
           <% end %>
+            </div>
           <% end %>
 
           <% if @reservations_as_user.where(statut: "aborted").length == 0 %>
-            <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="tabs-aborted-tab">
+            <div class="tab-pane fade" id="cancelledu" role="tabpanel" aria-labelledby="tabs-aborted-tab">
               <p>Nothing to see here !</p>
             </div>
           <% else %>
+              <div class="tab-pane fade" id="cancelledu" role="tabpanel" aria-labelledby="tabs-finished-tab">
             <% @reservations_as_user.where(statut: "aborted").each do |reservation| %>
-              <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="tabs-finished-tab">
                 <div class="card-dashboard user">
                   <div><% if reservation.queuer.user.picture.url != nil %><%= image_tag reservation.queuer.user.picture.url %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt=""><% end %></div>
                   <div class="text-dashboard col-sm-9">
                     <div class="top-card-dashboard">
                       <div class="name"><h3><%= reservation.queuer.user.name %></h3></div>
-                      <div class="date"><p><%= reservation.starts_at %> - <%= reservation.ends_at %></p></div>
+                      <div class="date">
+                        <p>
+                          <%= reservation.starts_at %> - <%= reservation.ends_at %>
+                        </p>
+                        <p>
+                          Total: €<%= (DateTime.parse(reservation.ends_at).to_i - DateTime.parse(reservation.starts_at).to_i).fdiv(3600)*reservation.queuer.price_per_hour %>
+                        </p>
+                      </div>
                     </div>
-                    <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                    <div class="description-dash"><p><%= reservation.content %></p></div>
                   </div>
                   <div class="button">
                     <div><p class="btn btn-danger">Cancelled</p></div>
                   </div>
                 </div>
             <% end %>
+                </div>
           <% end %>
         </div>
       </div>

@@ -118,7 +118,7 @@
       <% @reviews_as_queuer.each do |review| %>
       <% if review.user != current_user %>
       <% i += 1 %>
-      <div class="comment-container <% if i > 2 %> hide-comment <% end %>" data-aos="fade-right" data-aos-duration="1000">
+      <div class="comment-container comment-queuer d-none <% if i > 2 %> hide-comment <% end %>" data-aos="fade-right" data-aos-duration="1000">
         <div class="comment-card">
           <div class="comment-top">
             <div class="user-comment">
@@ -149,7 +149,7 @@
       <% @reviews_as_user.each do |review| %>
       <% if review.user != current_user %>
       <% i += 1 %>
-      <div class="comment-container <% if i > 2 %> hide-comment <% end %>" data-aos="fade-right" data-aos-duration="1000">
+      <div class="comment-container comment-user <% if i > 2 %> hide-comment <% end %>" data-aos="fade-right" data-aos-duration="1000">
         <div class="comment-card">
           <div class="comment-top">
             <div class="user-comment">
