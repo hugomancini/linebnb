@@ -228,7 +228,7 @@
                         </p>
                       </div>
                     </div>
-                    <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                    <div class="description-dash"><p><%= reservation.content %></p></div>
                   </div>
                   <div class="button">
                       <div><a href="#" class="btn btn-primary">Accepted</a></div>
@@ -258,7 +258,7 @@
                         </p>
                       </div>
                     </div>
-                    <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                    <div class="description-dash"><p><%= reservation.content %></p></div>
                   </div>
                   <div class="button">
                       <div><%= link_to "Cancel", decline_path(reservation), class: "btn btn-warning" %></div>
@@ -288,7 +288,7 @@
                       </p>
                     </div>
                   </div>
-                  <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                  <div class="description-dash"><p><%= reservation.content %></p></div>
                 </div>
                 <div class="button">
                   <div class="btn btn-warning" data-toggle="modal" data-target="#newcommentModal">Comment</div>
@@ -318,7 +318,7 @@
                         </p>
                       </div>
                     </div>
-                    <div class="description-dash"><p><%= reservation.statut %><%= reservation.content %></p></div>
+                    <div class="description-dash"><p><%= reservation.content %></p></div>
                   </div>
                   <div class="button">
                     <div><p class="btn btn-danger">Cancelled</p></div>
