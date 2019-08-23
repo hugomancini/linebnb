@@ -5,6 +5,9 @@ class QueuersController < ApplicationController
       @queuers_geocoded = []
       @myqueuers = Queuer.geocoded
       @myqueuers.each do |queuer|
+        if queuer.rating.nil?
+          queuer.rating = 0
+        end
         @queuers << queuer unless (queuer.price_per_hour > params[:price].to_s) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
         @queuers_geocoded << queuer unless (queuer.price_per_hour > params[:price].to_s) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
       end
@@ -13,6 +16,9 @@ class QueuersController < ApplicationController
       @queuers_geocoded = []
       @myqueuers = Queuer.geocoded
       @myqueuers.each do |queuer|
+        if queuer.rating.nil?
+          queuer.rating = 0
+        end
         @queuers << queuer unless (queuer.price_per_hour > params[:price].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius)
         @queuers_geocoded << queuer unless (queuer.price_per_hour > params[:price].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius)
       end
@@ -21,6 +27,9 @@ class QueuersController < ApplicationController
       @queuers_geocoded = []
       @myqueuers = Queuer.geocoded
       @myqueuers.each do |queuer|
+        if queuer.rating.nil?
+          queuer.rating = 0
+        end
         @queuers << queuer unless (queuer.rating < params[:rating].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius)
         @queuers_geocoded << queuer unless (queuer.rating < params[:rating].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius)
       end
@@ -29,6 +38,9 @@ class QueuersController < ApplicationController
       @queuers_geocoded = []
       @myqueuers = Queuer.geocoded
       @myqueuers.each do |queuer|
+        if queuer.rating.nil?
+          queuer.rating = 0
+        end
         @queuers << queuer unless (queuer.rating < params[:rating].to_i) || (queuer.price_per_hour > params[:price].to_i)
         @queuers_geocoded << queuer unless (queuer.rating < params[:rating].to_i) || (queuer.price_per_hour > params[:price].to_i)
       end
@@ -37,6 +49,9 @@ class QueuersController < ApplicationController
       @queuers_geocoded = []
       @myqueuers = Queuer.geocoded
       @myqueuers.each do |queuer|
+        if queuer.rating.nil?
+          queuer.rating = 0
+        end
         @queuers << queuer unless queuer.distance_from(params[:query]).to_i > queuer.radius
         @queuers_geocoded << queuer unless queuer.distance_from(params[:query]).to_i > queuer.radius
       end
@@ -45,6 +60,9 @@ class QueuersController < ApplicationController
       @queuers_geocoded = []
       @myqueuers = Queuer.geocoded
       @myqueuers.each do |queuer|
+        if queuer.rating.nil?
+          queuer.rating = 0
+        end
         @queuers << queuer unless queuer.price_per_hour > params[:price].to_i
         @queuers_geocoded << queuer unless queuer.price_per_hour > params[:price].to_i
       end
@@ -53,6 +71,9 @@ class QueuersController < ApplicationController
       @queuers_geocoded = []
       @myqueuers = Queuer.geocoded
       @myqueuers.each do |queuer|
+        if queuer.rating.nil?
+          queuer.rating = 0
+        end
         @queuers << queuer unless queuer.rating < params[:rating].to_i
         @queuers_geocoded << queuer unless queuer.rating < params[:rating].to_i
       end
