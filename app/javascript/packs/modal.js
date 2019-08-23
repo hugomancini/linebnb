@@ -7,17 +7,25 @@ const listenCheck = () => {
         if(input.checked) {
           document.querySelector('.queuer').classList.remove('d-none');
           document.querySelector('.user').classList.add('d-none');
-          document.querySelector('.comment-queuer').classList.remove('d-none');
-          document.querySelector('.comment-user').classList.add('d-none');
+          if(document.querySelector('.comment-queuer')) {
+            document.querySelector('.comment-queuer').classList.remove('d-none');
+          }
+          if(document.querySelector('.comment-user')) {
+            document.querySelector('.comment-user').classList.add('d-none');
+          }
         } else {
           document.querySelector('.user').classList.remove('d-none');
           document.querySelector('.queuer').classList.add('d-none');
-          document.querySelector('.comment-user').classList.remove('d-none');
-          document.querySelector('.comment-queuer').classList.add('d-none');
+          if(document.querySelector('.comment-queuer')) {
+            document.querySelector('.comment-queuer').classList.add('d-none');
+          }
+          if(document.querySelector('.comment-user')) {
+            document.querySelector('.comment-user').classList.remove('d-none');
+          }
         }
       });
     }
-  }, 1000)
+  }, 1000);
 };
 
 
