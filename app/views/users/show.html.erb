@@ -114,7 +114,7 @@
     </div>
 
     <% if current_user.is_q? %>
-    <div class="comment-queuer d-none">
+    <div class="comment-queuer d-none" data-aos="fade-right" data-aos-duration="1000">
       <% @reviews_as_queuer.each do |review| %>
       <% if review.user != current_user %>
       <div class="comment-container" data-aos="fade-right" data-aos-duration="1000">
@@ -150,7 +150,7 @@
     </div>
     <% end %>
 
-    <div class="comment-user">
+    <div class="comment-user" data-aos="fade-right" data-aos-duration="1000">
       <% @reviews_as_user.each do |review| %>
         <% if review.user != current_user %>
         <div class="comment-container comment-user" data-aos="fade-right" data-aos-duration="1000">
