@@ -1,30 +1,21 @@
-const modalLogin = () => {
-  if(document.querySelector(".login")) {
-      document.querySelector(".login").addEventListener('click', event => {
-      document.querySelector(".modal-login").style.display = "block";
-      document.querySelector(".mybody").classList.add("dark");
-
-      document.querySelector(".mybody").addEventListener('click', evento => {
-        document.querySelector(".modal-login").style.display = "none";
-        document.querySelector(".mybody").classList.remove("dark");
+const listenCheck = () => {
+  setTimeout(() => {
+    const toggle = document.querySelector('.toggle');
+    if(toggle) {
+      toggle.addEventListener('click', (event) => {
+        const input = document.querySelector('.checkrole');
+        if(input.checked) {
+          document.querySelector('.queuer').classList.remove('d-none');
+          document.querySelector('.user').classList.add('d-none');
+        } else {
+          document.querySelector('.user').classList.remove('d-none');
+          document.querySelector('.queuer').classList.add('d-none');
+        }
       });
-    });
-  };
-}
-const modalSignin = () => {
-  if(document.querySelector('.signin')) {
-      document.querySelector(".signin").addEventListener('click', event => {
-      document.querySelector(".modal-signin").style.display = "block";
-      document.querySelector(".mybody").classList.add("dark");
-
-      document.querySelector(".mybody").addEventListener('click', evento => {
-        document.querySelector(".modal-signin").style.display = "none";
-        document.querySelector(".mybody").classList.remove("dark");
-      });
-    });
-  };
-}
+    }
+  }, 1000)
+};
 
 
 
-export { modalLogin, modalSignin };
+export { listenCheck };
