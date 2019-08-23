@@ -8,8 +8,8 @@ class QueuersController < ApplicationController
         if queuer.rating.nil?
           queuer.rating = 0
         end
-        @queuers << queuer unless (queuer.price_per_hour > params[:price].to_s) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
-        @queuers_geocoded << queuer unless (queuer.price_per_hour > params[:price].to_s) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
+        @queuers << queuer unless (queuer.price_per_hour > params[:price].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
+        @queuers_geocoded << queuer unless (queuer.price_per_hour > params[:price].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
       end
     elsif params[:query].present? && params[:price].present?
       @queuers = []
