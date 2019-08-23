@@ -1,6 +1,6 @@
 <%= render './pages/signinmodal' %>
 <div class="container">
-  <div class="row">
+  <div class="row my-3">
     <div class="col-10 offset-1">
       <div class="search-banner">
       <h1 class="text-center">Find the perfect fit amongst our <b><%= @queuers.size * 13 %></b> queuers ! </h1>
@@ -27,7 +27,7 @@
                   placeholder: "Filter by rating"
                 %>
               </div>
-              <%= submit_tag "Filter", class: "btn btn-primary filter-button" %>
+              <%= submit_tag "Filter", class: "btn btn-primary filter-button mx-3" %>
             <% end %>
           </div>
       </div>
