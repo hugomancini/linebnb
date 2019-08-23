@@ -44,11 +44,9 @@
       </div>
     </div>
 
-    <% i = 0 %>
     <% @queuer.reviews.each do |review| %>
       <% if review.user != @queuer.user %>
-        <% i += 1 %>
-        <div class="comment-container-show mt-3 <% if i > 2 %> hide-comment <% end %>" data-aos="fade-right" data-aos-duration="1000">
+        <div class="comment-container-show mt-3" data-aos="fade-right" data-aos-duration="1000">
           <div class="comment-card-show">
             <div class="comment-top-show">
               <div class="user-comment-show">
@@ -80,14 +78,6 @@
           </div>
         </div>
       <% end %>
-    <% end %>
-
-    <% if @queuer.reviews.length != 0 && i > 2 %>
-      <div class="arrow" data-aos="fade-up" data-aos-duration="1000">
-        <h2>
-          <i class="fas fa-2x fa-sort-down"></i>
-        </h2>
-      </div>
     <% end %>
   </div>
 
