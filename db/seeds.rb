@@ -14,7 +14,6 @@ User.destroy_all
 
 QUEUER_ADDRESS = [
   "221 rue de tolbiac, paris",
-  "16 villa gaudelet, paris",
   "9 rue oudinot, paris",
   "3 place d'italie, paris",
   "14 rue crespin du gast, paris",
@@ -147,7 +146,44 @@ FINISHED_ADDRESS_SITE=[
 URL = "https://source.unsplash.com/random"
 
 puts "Seeding users who are not queuer nor client..."
-15.times do
+
+# Demo User
+user = User.new(
+  name:           "Bobby Briggs",
+  email:          "bobby@mail.com",
+  password:       "password",
+  is_q:           false,
+  rating:         rand(1..5),
+  description:    "Welcome on my profile! I am fond of cultural visits and like how the app allows to find queuers so easily!"
+)
+user.remote_picture_url = "https://resize-elle.ladmedia.fr/rcrop/638,,forcex/img/var/plain_site/storage/images/loisirs/series/que-sont-ils-devenus-les-acteurs-de-twin-peaks/dana-ashbrook-est-bobby-briggs/55924953-1-fre-FR/Dana-Ashbrook-est-Bobby-Briggs.jpg"
+sleep(2)
+user.save
+
+other_user = User.new(
+  name:           "Laura Palmer",
+  email:          "laura@mail.com",
+  password:       "password",
+  is_q:           true,
+  rating:         5,
+  description:    "Welcome on my profile!  I offer my time to queue for you from time to time, don't hesitate to book me!"
+)
+other_user.remote_picture_url = "https://www.newstatesman.com/sites/default/files/styles/cropped_article_image/public/blogs_2014/04/Laura%60s_photo_in_the_Hall_of_Fame.jpg?itok=g-XYRs0k"
+sleep(2)
+other_user.save
+
+queuer = Queuer.new(
+  address:        "16 villa gaudelet, paris",
+  description:    "Welcome on my profile!  I offer my time to queue for you from time to time, don't hesitate to book me!",
+  radius:         rand(1...3),
+  price_per_hour: 19,
+  rating:         rand(1..5)
+)
+sleep(2)
+queuer.user = other_user
+queuer.save
+
+14.times do
   # Users (Non-queuer, non-client)
   user = User.new(
     name:           Faker::Name.name,
@@ -165,7 +201,7 @@ end
 puts "Seeding queuers, clients, reservations..."
 i = 0
 j = 0
-15.times do
+14.times do
   # Users (Queuer, non-client)
   user = User.new(
     name:           Faker::Name.name,
@@ -240,7 +276,6 @@ j = 0
   finished_reservation.queuer = queuer
   finished_reservation.user = client
   finished_reservation.save
-
 
   review = Review.new(
     content:        "Was a bit worried as an early adopter, but finally very happy with this new app/service overall as well as with the queuer who stood for me! Had come just on time to pass the line!",
