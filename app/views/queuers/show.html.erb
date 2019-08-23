@@ -13,9 +13,6 @@
           <img src="http://www.wallspaper.fr/wallpaper/fond%20d%20%C3%A9cran%20tablette%2010%20pouces-1.jpg" alt="">
         <% end %>
       </div>
-      <div class="price">
-        <h3><%= @queuer.price_per_hour %>€<br>/hour</h3>
-      </div>
       <div class="info-profil">
         <div class="name">
           <h2><%= @queuer.user.name %></h2>
@@ -37,9 +34,12 @@
           <% end %>
         </div>
       </div>
-      <div class="description">
+      <div class="info-profil">
+        <div class="description">
         <p><span style="font-weight: bolder;">Address: </span><%= @queuer.address %></p>
           <p><%= @queuer.description %></p>
+      </div>
+      <div style="align-self: flex-start; font-weight: bolder;" class="px-2 salut"><h3><%= @queuer.price_per_hour %>€/h</h3></div>
       </div>
     </div>
 
