@@ -8,8 +8,8 @@ class QueuersController < ApplicationController
         if queuer.rating.nil?
           queuer.rating = 0
         end
-        @queuers << queuer unless (queuer.price_per_hour > params[:price].to_s) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
-        @queuers_geocoded << queuer unless (queuer.price_per_hour > params[:price].to_s) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
+        @queuers << queuer unless (queuer.price_per_hour > params[:price].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
+        @queuers_geocoded << queuer unless (queuer.price_per_hour > params[:price].to_i) || (queuer.distance_from(params[:query]).to_i > queuer.radius) || (queuer.rating < params[:rating].to_i)
       end
     elsif params[:query].present? && params[:price].present?
       @queuers = []
@@ -91,7 +91,21 @@ class QueuersController < ApplicationController
   end
 
   def show
+    @geocoded_queuers = Queuer.geocoded
+    @geocoded_queuers_filtered = []
     @queuer = Queuer.find(params[:id])
+    @geocoded_queuers.each do |element|
+      if element.id == @queuer.id
+        @geocoded_queuers_filtered << element
+      end
+    end
+    @markers = @geocoded_queuers_filtered.map do |geocoded|
+        {
+          lat: geocoded.latitude,
+          lng: geocoded.longitude,
+          infoWindow: render_to_string(partial: "info_window_for_show", locals: { geocoded: geocoded })
+        }
+    end
   end
 
   def new
