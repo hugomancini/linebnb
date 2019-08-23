@@ -114,9 +114,10 @@
     </div>
 
     <% if current_user.is_q? %>
+    <div class="comment-queuer d-none">
       <% @reviews_as_queuer.each do |review| %>
       <% if review.user != current_user %>
-      <div class="comment-container comment-queuer d-none" data-aos="fade-right" data-aos-duration="1000">
+      <div class="comment-container" data-aos="fade-right" data-aos-duration="1000">
         <div class="comment-card">
           <div class="comment-top">
             <div class="user-comment">
@@ -146,41 +147,46 @@
       </div>
       <% end %>
       <% end %>
+    </div>
     <% end %>
 
+    <div class="comment-user">
       <% @reviews_as_user.each do |review| %>
-      <% if review.user != current_user %>
-      <div class="comment-container comment-user" data-aos="fade-right" data-aos-duration="1000">
-        <div class="comment-card">
-          <div class="comment-top">
-            <div class="user-comment">
-              <div><% if review.user.picture.url != nil %><%= image_tag review.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
-              <div><%= review.user.name %></p></div>
+        <% if review.user != current_user %>
+        <div class="comment-container comment-user" data-aos="fade-right" data-aos-duration="1000">
+          <div class="comment-card">
+            <div class="comment-top">
+              <div class="user-comment">
+                <div><% if review.user.picture.url != nil %><%= image_tag review.user.picture.url, class: "avatar" %> <% else %> <img src="https://images.assetsdelivery.com/compings_v2/gmast3r/gmast3r1511/gmast3r151100776.jpg" alt="" class="avatar"><% end %></div>
+                <div><%= review.user.name %></p></div>
+              </div>
+              <div>
+                <p>
+                    <% if review.rating != nil %>
+                      <% review.rating.round.times do %>
+                        <i class="fas fa-star"></i>
+                      <% end %>
+                      <% (5 - review.rating.round).times do %>
+                        <i class="far fa-star"></i>
+                      <% end %>
+                    <% else %>
+                      <% 5.times do %>
+                        <i class="far fa-star"></i>
+                      <% end %>
+                    <% end %>
+                  </p>
+              </div>
             </div>
-            <div>                <p>
-                  <% if review.rating != nil %>
-                    <% review.rating.round.times do %>
-                      <i class="fas fa-star"></i>
-                    <% end %>
-                    <% (5 - review.rating.round).times do %>
-                      <i class="far fa-star"></i>
-                    <% end %>
-                  <% else %>
-                    <% 5.times do %>
-                      <i class="far fa-star"></i>
-                    <% end %>
-                  <% end %>
-                </p>
+            <div class="comment-content">
+              <p><%= review.content %></p>
             </div>
-          </div>
-          <div class="comment-content">
-            <p><%= review.content %></p>
           </div>
         </div>
-      </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
+
   <div class="row col-sm-8 offset-1 margintopmega">
     <div class="big-dash-container" data-aos="fade-left" data-aos-duration="1000">
       <h2> <% if @user.is_q? %>
