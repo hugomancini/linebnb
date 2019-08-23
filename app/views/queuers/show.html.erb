@@ -62,11 +62,17 @@
               </div>
               <div>
                 <p>
-                  <% review.user.rating.round.times do %>
-                    <i class="fas fa-star"></i>
-                  <% end %>
-                  <% ((review.user.rating.round - 5) * -1 % 5).times do %>
-                    <i class="far fa-star"></i>
+                  <% if review.rating != nil %>
+                    <% review.rating.round.times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <% (5 - review.rating.round).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  <% else %>
+                    <% 5.times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
                   <% end %>
                 </p>
               </div>

@@ -3,28 +3,28 @@
   <div class="row my-3">
     <div class="col-10 offset-1">
       <div class="search-banner">
-      <h1 class="text-center">Find the perfect fit amongst our <b><%= @queuers.size * 13 %></b> queuers ! </h1>
+      <h1 class="text-center">Find the perfect fit amongst our <b><%= @queuers.size %></b> queuer(s) ! </h1>
         <div class="search-form text-center">
             <%= form_tag queuers_path, method: :get, :class => "form-inline" do %>
               <div class="form-items m-1">
                 <%= text_field_tag :query,
                   params[:query],
-                  class: "form-control flat_address",
-                  placeholder: "In which city do you need a Queuer ?"
+                  class: "form-control",
+                  placeholder: "Which address ?"
                 %>
               </div>
               <div class="form-items m-1">
                 <%= text_field_tag :price,
                   params[:price],
                   class: "form-control",
-                  placeholder: "Filter by price"
+                  placeholder: "Max Price"
                 %>
               </div>
               <div class="form-items m-1">
                 <%= text_field_tag :rating,
                   params[:rating],
                   class: "form-control",
-                  placeholder: "Filter by rating"
+                  placeholder: "Min Rate"
                 %>
               </div>
               <%= submit_tag "Filter", class: "btn btn-primary filter-button mx-3" %>
@@ -34,8 +34,6 @@
     </div>
   </div>
 </div>
-
-​
 <div class="container-bis grid-queuer">
   <div class="d-flex">
     <div class="grid col-sm-6">
@@ -59,6 +57,20 @@
           <div class="card-queuer-infos">
             <div>
               <h2><%= link_to queuer.user.name, queuer_path(queuer) %></h2>
+                <p>
+                  <% if queuer.rating != nil %>
+                    <% queuer.rating.round.times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <% (5 - queuer.rating.round).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  <% else %>
+                    <% 5.times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>
+                  <% end %>
+                </p>
               <p><b>Area:</b> <%= queuer.address %></p>
             </div>
             <h2 class="card-queuer-pricing">€<%= queuer.price_per_hour %></%>/hour</h2>
